@@ -32,8 +32,8 @@ for i = 1:length(par.channels)
 end
 
 %[dataRAW_NRD] = loadNRD(par);
-%[dataJSearchF] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataF);
-[dataJSearchF] = TTL_data(par,TimestampsEvent,TTLs,dataF);
+[dataJSearchF] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataF);
+%[dataJSearchF] = TTL_data(par,TimestampsEvent,TTLs,dataF);
 %compare2GUI(par,TimestampsEvent,TTLs,dataF)
 Spike2Trigger_delay(par,dataJSearchF)
 LFP_delay(par,dataJSearchF,1,200)
@@ -43,9 +43,6 @@ LFP_delay(par,dataJSearchF,1,200)
 %averageSum(dataJSearchF)
 
 averageTemplate(par,dataJSearchF,1,150)
-
-
-
 
 timeStampsDSort = timeStampDsort(par);
 for i = 1:length(timeStampsDSort)
@@ -63,27 +60,27 @@ for i = 1:length(timeStampsDSort)
 end
 figure
 surf(mean(dataDSortF,3))
-title('Template Dsort')
+%title('Template Dsort')
 xlabel('Channels')
 ylabel('Time [samples]')
 zlabel('Voltage [uV]')
+handleFigurePlot()
 
-
-[true1,falsePositive,par] = DsortToJSearch(timeStampsDSort,indexSampleLight,par);
-[true2,falseNegative,par] = JSearchToDsort(timeStampsDSort,indexSampleLight,par);
+%[true1,falsePositive,par] = DsortToJSearch(timeStampsDSort,indexSampleLight,par);
+%[true2,falseNegative,par] = JSearchToDsort(timeStampsDSort,indexSampleLight,par);
 
 [par] = shuffleCorrelation_v2(par,dataDSortF,2,25,0.7,'Dsort');
 [par] = shuffleCorrelation_v2(par,dataJSearchF,2,25,0.7,'JSearch');
 
 ThresholdGT(par,indexSampleLight,timeStampsDSort,falseNegative)
 
-fprintf('\n\n')
-fprintf('T_Spks Dsort:    %i\n',length(timeStampsDSort))
-fprintf('T_Spks JSearch:  %i\n',length(indexSampleLight))
-fprintf('True:            %i\n',true1)
-fprintf('falsePositive:   %i\n',falsePositive)
-fprintf('falseNegative:   %i\n',falseNegative)
-fprintf('JSearch extra:   %i\n',true2)
+% fprintf('\n\n')
+% fprintf('T_Spks Dsort:    %i\n',length(timeStampsDSort))
+% fprintf('T_Spks JSearch:  %i\n',length(indexSampleLight))
+% fprintf('True:            %i\n',true1)
+% fprintf('falsePositive:   %i\n',falsePositive)
+% fprintf('falseNegative:   %i\n',falseNegative)
+% fprintf('JSearch extra:   %i\n',true2)
 
 % [par] = ThresholdGT(par,indexSampleLight,timeStampsDSort,falseNegative);
 % 
