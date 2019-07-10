@@ -29,15 +29,15 @@ for icell_1 = 1:length(clustNr)
     T1 = rez.st(rez.st(:,end)==Cluster1,1);  
     
     
-    T1_before = T1(logical(T1 < sizeR));   
-    T1_after  = T1(logical(T1 > sizeR));
+    T1_before = T1(logical(T1 < sizeR)));   
+    TI_after  = T1(logical(T1 > sizeR)));
          
     for k = 1:length(T1_before)
         templateStackBefore(:,:,k) = dataRAW(T1_before(k)+window,:);
     end
     
-    for k = 1:length(T1_after)
-        templateStackAfter(:,:,k) = dataRAW(T1_after(k)+window,:);
+    for k = 1:length(TI_after)
+        templateStackAfter(:,:,k) = dataRAW(TI_after(k)+window,:);
     end
     
     templateAve{1,icell_1} = mean(templateStackBefore,3);

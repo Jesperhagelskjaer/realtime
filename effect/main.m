@@ -4,19 +4,19 @@ clc
 
 [par] = parameter();
 
-[rezT] = loadRez(par);
+[rez] = loadRez(par);
+[par] = templateLight(par);             %take of the template used for real time classification
+%plotISI(rezT); 
 
-plotISI(rezT); 
+[RasterR1,par] = rasterMain(par,rez);   %create the raster plot
 
-[RasterR1] = raster_f(par,rezT);
-[RasterR1] = raster_cat(par,rezT);
+plotRasterEffectV2(par,rez,RasterR1)
 
-
-%plotRasterEffect(par,rezT,RasterR1)
-plotRasterEffectV2(par,rezT,RasterR1)
-%gassuasianRaster(par,rezT,RasterR1)
 
 %% LFP effect
 % The filtering effect should be made very careful
 
-%LFP_effect(par,rezT)
+LFP_effect(par,rez)
+
+
+%gassuasianRaster(par,rezT,RasterR1)

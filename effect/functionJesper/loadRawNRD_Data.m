@@ -2,8 +2,6 @@ function [] = loadRawNRD_Data(ops)
 tic
 fprintf('%-20s','Loading started')
 
-
-
 for i = 1:length(par.chs)
 
     fullNameNRD = strcat(par.path{1},par.e_str,'\CheetahRawData.nrd');
