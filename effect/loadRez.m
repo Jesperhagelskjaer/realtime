@@ -1,6 +1,6 @@
 function [rez] = loadRez(par)
 
-load(strcat(par.path{1}, par.e_str,par.rezName));
+load(strcat(par.path,par.name,par.rezName));
 
 end
 
