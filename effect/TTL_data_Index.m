@@ -19,17 +19,16 @@ for i = 1:length(time)
     %dataRAW_NRD_mat(:,:,i-1) = dataRAW_NRD(par.xAxis+indexSampleLight(i-1),:);
     
     
-    if 0 && i < 10
+    if 1 && i == 100
         h = figure;
         subplot(2,2,1)
         plot(dataJSearchF(:,1,i))
         subplot(2,2,2)
         surf(dataJSearchF(:,:,i))
-%         subplot(2,2,3)
-%         plot(dataRAW_NRD(:,par.channels(1),i-1))
-%         subplot(2,2,4)
-%         surf(dataRAW_NRD_mat(:,par.channels,i-1))
-        %indexBlock
+        subplot(2,2,3)
+%        plot(dataRAW_NRD(:,par.channels(1),i-1))
+%        subplot(2,2,4)
+%        plot(dataRAW_NRD_mat(:,par.channels,i-1))
         drawnow
         close(h)
         

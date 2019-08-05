@@ -29,15 +29,15 @@ clc
 
 %% Plot trace
 
+
+
 [dataTraceD,~] = traceDSort(par,rez,dataCSC);
 
 plotTraceChannel(par,dataJSearchF_shift,dataTraceD)
 
 plotMeanTrace(par,dataJSearchF_shift,dataTraceD)
 
-plotOneTrace(dataTraceJ_Light,5)
-
-plotTemplateDSort(rez,10)
+plotOneTrace(dataCSC_light,5)
 
 %% PCA space
 
@@ -50,6 +50,7 @@ PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
 %% Correlate DSort and JSearch
 
 %cor_D_J(par,rez,dataCSC_light,indexLight);
+
 
 %% Plot the raster of the nuerons
 [RasterR1,par] = rasterMain(par,rez);   %create the raster plot

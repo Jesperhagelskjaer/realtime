@@ -20,7 +20,7 @@ par.useBitmVolt         = 'Y'; %change the scale from bits to Volt (Y/N)
 par.signalInverted      = 'Y'; %Invert the signal -/+ (Y/N)     
 
 
-par.xAxis               = [-15:15]; %-30:30
+par.xAxis               = [-3000:3000]; %-30:30
 
 par.shifted             = 14;   %correction in index for difference in TTL and maximum peak used in DSOrt
 
