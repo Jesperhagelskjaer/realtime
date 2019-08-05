@@ -1,8 +1,8 @@
-function [TTLs,TimestampsEvent] = loadEvent(path)
+function [TTLs,TimestampsEvent] = loadEvent(path,e_str)
 
 tic
 
-fullNameEvents = strcat(path,'\Events.nev');
+fullNameEvents = strcat(path, e_str,'\Events.nev');
 
 [TimestampsEvent, EventIDs, TTLs, Extras, EventStrings, HeaderEvent] = Nlx2MatEV(fullNameEvents, [1 1 1 1 1], 1, 1, [] );
 time = toc;

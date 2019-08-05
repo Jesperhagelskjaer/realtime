@@ -10,8 +10,8 @@ for i = 1:length(par.chs)
 
         dataCSC(:,i) = SamplesVectorUF;     
 end
-
-
+dataCSC = invertSignal(dataCSC,par);
+dataCSC = filterSignal(par,dataCSC);
 
 end
 

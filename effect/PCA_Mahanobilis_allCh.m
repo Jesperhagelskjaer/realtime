@@ -46,7 +46,7 @@ plot(meanCh);
 score1 = score(logical(c == 1),1:3);
 score2 = score(logical(c == 2),1:3);
 score3 = score(logical(c == 3),1:3);
-%score4 = score(logical(c == 4),1:3);
+score4 = score(logical(c == 4),1:3);
 score5 = score(logical(c == 5),1:3);
 score6 = score(logical(c == 6),1:3);
 score7 = score(logical(c == 7),1:3);
@@ -75,14 +75,18 @@ figure
 hold on
 scatter3(score1(:,1),score1(:,2),score1(:,3),0.002,'.','DisplayName','J-1')
 %scatter3(score2(:,1),score2(:,2),score2(:,3),0.002,'.','DisplayName','D-1')
-%scatter3(score3(:,1),score3(:,2),score3(:,3),0.002,'.','DisplayName','D-2')
-%scatter3(score4(:,1),score4(:,2),score4(:,3),0.002,'.','DisplayName','D-3')
+scatter3(score3(:,1),score3(:,2),score3(:,3),0.002,'.','DisplayName','D-2')
+scatter3(score4(:,1),score4(:,2),score4(:,3),0.002,'.','DisplayName','D-3')
 %scatter3(score5(:,1),score5(:,2),score5(:,3),0.002,'.','DisplayName','D-4')
 %scatter3(score6(:,1),score6(:,2),score6(:,3),0.002,'.','DisplayName','D-5')
 %scatter3(score7(:,1),score7(:,2),score7(:,3),0.002,'.','DisplayName','D-6')
 %scatter3(score8(:,1),score8(:,2),score8(:,3),0.002,'.','DisplayName','D-7')
-scatter3(score9(:,1),score9(:,2),score9(:,3),2,'o','DisplayName','D-8')
+%scatter3(score9(:,1),score9(:,2),score9(:,3),2,'o','DisplayName','D-8')
 legend
+xlabel('1st Principal Component')
+ylabel('2nd Principal Component')
+zlabel('3rd Principal Component')
+
 
 figure
 scatter3(score(:,1),score(:,2),score(:,3),0.002,c,'.')

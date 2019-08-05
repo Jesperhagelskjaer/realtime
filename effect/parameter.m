@@ -1,16 +1,13 @@
 function [par] = parameter()
 
+%par.lightPath           =  'P:\AU256873\recording\2019-07-09_12-23-51\';
 par.lightPath           = 'P:\AU256873\recording\2019-07-09_13-16-56\';
 
-
-par.path                = 'P:\AU256873\recording\2019-07-09_12-23-51\'; % 'openEphys' only: where raw files are
-par.name                = 'nrd\12_23_51And13_28_44\';
+par.path                = 'P:\AU256873\recording\2019-07-09_13-16-56\'; % 'openEphys' only: where raw files are
+%par.path                = 'P:\AU256873\recording\2019-07-09_12-23-51\'; % 'openEphys' only: where raw files are
 
 par.rezName             = 'rezFMerged'; % 'rezDMMerged.mat';  %used only for OE
-par.datatype            = 'digiLynxCSC';% (digiLynxCSC/digiLynxNRD)
-
-par.template            = 51; %platicity change
-par.lightTemplate       = 17; %platicity change
+par.datatype            = 'digiLynxNRD';% (digiLynxCSC/digiLynxNRD)
 
 par.template_LFP        = {'ch',[29 30 31 32]}; %'temlate = 'tp' parameter 'all' or which template [... 2 3 ...] 
                                         %channels = 'ch' 'all' or write which channels [1 2 3 4] the template is defined on 
@@ -25,9 +22,15 @@ par.signalInverted      = 'Y'; %Invert the signal -/+ (Y/N)
 
 par.xAxis               = [-15:15]; %-30:30
 
-par.shifted             = 16;   %correction in index for difference in TTL and maximum peak used in DSOrt
+par.shifted             = 14;   %correction in index for difference in TTL and maximum peak used in DSOrt
 
 par.spatial             = 32;
+par.filter              = 'Y';
+par.fshigh              = 300;   % Frequency for high pass filtering
+par.slow                = 5000;  %
+par.fs                  = 30000;
+
+
 if strcmp(par.datatype,'digiLynxCSC')
     par.e_str = '\CSC\';
 else

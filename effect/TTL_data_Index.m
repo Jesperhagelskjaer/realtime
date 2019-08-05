@@ -1,4 +1,4 @@
-function [dataJSearchF,dataJSearchF_shift] = TTL_data_Index(par,timestamps,TTLs,TTLs_time,dataF)
+function [dataJSearchF,dataJSearchF_shift,indexSampleLight] = TTL_data_Index(par,timestamps,TTLs,TTLs_time,dataF)
 mBlockSize = 512;
 time = TTLs_time(logical(TTLs == 1)); %one correspond to laserPulse on
 
