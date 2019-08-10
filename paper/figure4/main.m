@@ -32,11 +32,11 @@ for i = 1:length(par.channels)
 end
 
 %[dataRAW_NRD] = loadNRD(par);
-%[dataJSearchF] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataF);
-[dataJSearchF] = TTL_data(par,TimestampsEvent,TTLs,dataF);
+[dataJSearchF] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataF);
+%[dataJSearchF] = TTL_data(par,TimestampsEvent,TTLs,dataF);
 %compare2GUI(par,TimestampsEvent,TTLs,dataF)
 Spike2Trigger_delay(par,dataJSearchF)
-LFP_delay(par,dataJSearchF,1,200)
+LFP_delay(par,dataJSearchF,1,150)
 
 
 
