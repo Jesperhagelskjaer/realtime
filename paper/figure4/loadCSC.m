@@ -1,6 +1,6 @@
 function [data,Timestamps,m] = loadCSC(par,i,chEnd)
     
-    i = par.channels(i);
+    i = par.chs(i);
 
     fullNameCNS = strcat(par.path,'/csc/CSC',num2str(i),'.ncs');
     [Timestamps, ChannelNumbers, SampleFrequencies,NumberOfValidSamples, Samples, Header] = Nlx2MatCSC(fullNameCNS,[1 1 1 1 1], 1, 1, [] );

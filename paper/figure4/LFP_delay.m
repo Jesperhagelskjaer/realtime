@@ -34,7 +34,7 @@ for i = start:endC
         plot(data(:,ch,i))
         plot([abs(par.samplesBefore) abs(par.samplesBefore)],[-50 50],'-r')
         plot(indexAP,valueAP,'gO')
-        close(h)
+        %close(h)
     end
 end
 edges = -50.5:1:50.5;
@@ -46,6 +46,6 @@ xlabel('Time [samples]')
 ylabel('Counts')
 title(['spikes - ' , num2str(i)])
 legend
-figureS_plot()
+%figureS_plot()
 end
 

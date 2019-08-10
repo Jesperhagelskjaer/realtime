@@ -17,8 +17,7 @@ else
     endC = size(data,3);
 end
 
-ch = 1;
-
+ch = 1
 A_indexAP = [];
 
 for i = start:endC
@@ -28,14 +27,16 @@ for i = start:endC
     A_indexAP = [A_indexAP value];
     
     
-    if  0 && i == 2 || i == endC %&& value < 25
+    if  1 && i == 2 || i == endC %&& value < 25
         h = figure;
         hold on
         plot(data(:,ch,i))
         plot([abs(par.samplesBefore) abs(par.samplesBefore)],[-50 50],'-r')
         plot(indexAP,valueAP,'gO')
+        xlabel('samples')
+        ylabel('voltage [uV]')
         title([ num2str(i),' - ',num2str(endC) ])
-        close(h)
+        %close(h)
         
     end
 end
@@ -43,7 +44,7 @@ edges = -50.5:1:50.5;
 figure
 histogram(A_indexAP,edges)
 title(['spikes - '  num2str(i)])
-figureS_plot()
+%figureS_plot()
 xlabel('Time [samples]')
 ylabel('Counts')
 
