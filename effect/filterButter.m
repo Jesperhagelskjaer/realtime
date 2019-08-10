@@ -1,4 +1,4 @@
-function [datr] = filterSignal(par,dataRAW)
+function [dataFilterede] = filterButter(par,dataRAW)
 
 if strcmp(par.filtertype{1}, 'Y')
     
@@ -21,5 +21,19 @@ else
     datr = dataRAW;
     
 end
-end
 
+
+
+
+datatF = double(dataRAW);
+
+dataFilterede = filter(b1, a1, datatF);
+
+
+time = toc;
+
+fprintf(' - finished - Elepased time, %2.2f seconds\n',time)
+
+
+
+end

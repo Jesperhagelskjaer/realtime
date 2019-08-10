@@ -10,7 +10,10 @@ minR = find(par.xAxis == 0);
 
 for i = 1:size(data,3)
     [~, minMatrix(:,i)] = min(data(1:minR,:,i));
-    [~, maxMatrix(:,i)] = max(data(minR:end,:,i));
+    [~, maxMatrix(:,i)] = min(data(minR:end,:,i));
+    %h = figure;
+    %plot(par.xAxis,data(:,1,i))
+    %close(h)
 end
 
 minMatrix = minMatrix - minR;
@@ -24,8 +27,9 @@ for i =1:size(data,2)
     histogram(maxMatrix(i,:))
     handleFigurePlot
     ylabel('Counts')
+    xlabel('Time [samples]')
     if i == 1
-    plot([0 33],[600 600],'k')
+    %plot([0 33],[600 600],'k')
     end
  end
 

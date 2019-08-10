@@ -19,7 +19,7 @@ end
 
 for ii = 1:size(par.path,2)
     
-    fullNameCNS = strcat(par.path,par.e_str,'CSC',num2str(par.chs(1)),'.ncs');
+    fullNameCNS = strcat(par.path,'\csc\CSC',num2str(par.chs(1)),'.ncs');
     [~, ~, ~,~, Samples, ~] = Nlx2MatCSC(fullNameCNS,[1 1 1 1 1], 1, 1, [] );
     
     [m,n] = size(Samples); %can be be combined with below

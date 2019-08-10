@@ -5,7 +5,7 @@ clc
 [par] = parameter();
 
 [rez] = loadRez(par);
-%[par] = templateLight(par);             %take of the template used for real time classification
+[par] = templateLight(par);             %take of the template used for real time classification
 %plotISI(rezT); 
 
 %% plot the average waveform of JSearch and Dsort
@@ -14,37 +14,47 @@ clc
 %% Load the different files
 
 %load event for light and non-light case
-[TTLs,TimestampsEvent] = loadEvent(par.path,par.e_str);
-[TTLsLight,TimestampsEventLight] = loadEvent(par.lightPath,par.e_str);
+[TTLs,TimestampsEvent] = loadEvent(par.path,'\csc\');
+[TTLsLight,TimestampsEventLight] = loadEvent(par.lightPath,'\csc\');
 
-% load csc files
+% load csc files load the light and the nonlight case
 [dataCSC,Timestamps] = main_load_csc(par,par.path); %Load no light sessions
 [dataCSC_light,Timestamps_light] = main_load_csc(par,par.lightPath); %load light session
 
+[data] = main_load_NRD(par,par.path);
 
-%% crop the data into session 
+%% Filtering
+[data] = filterMain(par,data,'NRD');
+
+
+%% crop the data into session of the TTL
 
 [dataTraceJ,dataJSearchF_shift,~] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataCSC);
 [dataTraceJ_Light,dataJSearchF_light_shift,indexLight] = TTL_data_Index(par,Timestamps_light,TTLsLight,TimestampsEventLight,dataCSC_light);
 
 %% Plot trace
+figure
+hold on
+plot(data.NRD(1:10000))
+plot(data.dataF(1:10000))
 
-[dataTraceD,~] = traceDSort(par,rez,dataCSC);
+%[dataTraceD,~] = traceDSort(par,rez,dataCSC);
 
-plotTraceChannel(par,dataJSearchF_shift,dataTraceD)
+%plotTraceChannel(par,dataJSearchF_shift,dataTraceD)
 
-plotMeanTrace(par,dataJSearchF_shift,dataTraceD)
+%plotMeanTrace(par,dataJSearchF_shift,dataTraceD)
 
-plotOneTrace(dataTraceJ_Light,5)
+%plotOneTrace(par,dataJSearchF_light_shift,7,'single'), %single/all
 
-plotTemplateDSort(rez,10)
+%plotTemplateDSort(rez,10)
 
 %% PCA space
 
-PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
+%PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
 
 %% plot AC AND LFP just for J
 
+%plot_AC_TTL_LFP(par,dataTraceJ)
 %plot_AC_TTL_LFP(par,dataTraceJ_Light)
 
 %% Correlate DSort and JSearch
