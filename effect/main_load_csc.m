@@ -1,17 +1,22 @@
 function [dataCSC,Timestamps] = main_load_csc(par,path)
 
-for i = 1:length(par.chs)
-    fprintf('loading channel: %d\n',par.chs(i)) 
-    [SamplesVectorUF,Timestamps,mBlockSize] = loadCSC(par,path,i);
+for ii = 1:size(par.path,1)
+
+for i = 1:length(par.chs{2})
+    ch = par.chs{2}(i);
+    fprintf('loading channel: %d\n',ch) 
+    [SamplesVectorUF,Timestamp,mBlockSize] = loadCSC(par.path{ii},ch);
     
         if i == 1
-            dataCSC = nan(length(SamplesVectorUF),length(par.chs));
+            data_CSC = nan(length(SamplesVectorUF),length(par.chs));
         end
 
-        dataCSC(:,i) = SamplesVectorUF;     
+        data_CSC(:,i) = SamplesVectorUF;     
 end
-dataCSC = invertSignal(dataCSC,par);
-dataCSC = filterSignal(par,dataCSC);
+data_CSC = invertSignal(par,data_CSC);
+dataCSC{ii} = filterSignal(par,data_CSC); %filterMain(par,datum,'CSC')
 
+Timestamps{ii} = Timestamp;
+end
 end
 

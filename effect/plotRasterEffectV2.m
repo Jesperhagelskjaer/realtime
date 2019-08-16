@@ -1,8 +1,9 @@
 function [] = plotRasterEffectV2(par,rez,RasterR1)
-X = -par.before:1:par.after;
+
+X = par.interval(1):par.interval(2);
 
 template = par.template;
-
+for ii = 1:size(par.path,2)
 for i = 1:size(RasterR1,2)
     
     h = figure('units','normalized','outerposition',[0 0 1 1]);
@@ -29,11 +30,11 @@ for i = 1:size(RasterR1,2)
     
     subplot(2,3,3)
     surf(par.figureLight)
-    title(['light template real-time classi'])
+    title(['Light temp RT classification'])
     view(0,0) 
     
 end
-
+end
 
 
 

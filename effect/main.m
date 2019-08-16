@@ -1,50 +1,42 @@
 clear all
-close all
+%close all
 clc
 
-[par] = parameter();
+[par,datum] = parameter();
 
-[rez] = loadRez(par);
-[par] = templateLight(par);             %take of the template used for real time classification
+%[rez] = loadRez(par);
+%[par] = templateLight(par);             %take of the template used for real time classification
 %plotISI(rezT); 
 
 %% plot the average waveform of JSearch and Dsort
-%plot_csc_with_event(par,1)
+plot_csc_with_event(par,1)
 
 %% Load the different files
 
 %load event for light and non-light case
-[TTLs,TimestampsEvent] = loadEvent(par.path,'\csc\');
-[TTLsLight,TimestampsEventLight] = loadEvent(par.lightPath,'\csc\');
+[TTLs,TimestampsEvent] = loadEvent(par.path);
 
 % load csc files load the light and the nonlight case
 [dataCSC,Timestamps] = main_load_csc(par,par.path); %Load no light sessions
-[dataCSC_light,Timestamps_light] = main_load_csc(par,par.lightPath); %load light session
 
-[data] = main_load_NRD(par,par.path);
+[datum] = main_load_NRD(par,datum,par.path);
 
 %% Filtering
-[data] = filterMain(par,data,'NRD');
-
+[datum] = filterMain(par,datum,'NRD');
 
 %% crop the data into session of the TTL
 
-[dataTraceJ,dataJSearchF_shift,~] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataCSC);
-[dataTraceJ_Light,dataJSearchF_light_shift,indexLight] = TTL_data_Index(par,Timestamps_light,TTLsLight,TimestampsEventLight,dataCSC_light);
+[dataTraceJ,dataJSearchF_shift] = TTL_data_Index(par,Timestamps,TTLs,TimestampsEvent,dataCSC);
 
 %% Plot trace
-figure
-hold on
-plot(data.NRD(1:10000))
-plot(data.dataF(1:10000))
-
 %[dataTraceD,~] = traceDSort(par,rez,dataCSC);
 
-%plotTraceChannel(par,dataJSearchF_shift,dataTraceD)
+%plotTraceChannel(par,dataJSearchF_shift,dataTraceD) Plot  all
 
 %plotMeanTrace(par,dataJSearchF_shift,dataTraceD)
-
-%plotOneTrace(par,dataJSearchF_light_shift,7,'single'), %single/all
+%,'trace',[1 200]
+plotOneTrace(par,dataTraceJ);
+ 
 
 %plotTemplateDSort(rez,10)
 

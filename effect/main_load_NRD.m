@@ -1,20 +1,25 @@
-function [data] = main_load_NRD(par,path)
+function [datum] = main_load_NRD(par,datum,path)
 
-for i = 1:length(par.template_LFP{2})
-    ch = par.template_LFP{2}(i);
+if any(strcmpi(par.filtertype,'nrd'))  
+for ii = 1:size(par.path,2)
+    
+for i = 1:length(par.chs{2})
+    ch = par.chs{2}(i);
     fprintf('%0.0f - ', i )
     NameNRD = 'CheetahRawData.nrd';
-    fullNameNRD = strcat(path,'\nrd\',NameNRD);
+    fullNameNRD = strcat(path{ii},'\nrd\',NameNRD);
     [~, SamplesNRD, Header] = Nlx2MatNRD(fullNameNRD,ch-1 ,[1 1], 1, 1, [] );
     %         figure
     %         plot(SamplesNRD(i,:))
     
     if (i == 1 )
-        dataRAW = zeros(length(SamplesNRD),length(par.template_LFP{2}),'double');
+        dataRAW = zeros(length(SamplesNRD),length(par.chs{2}),'double');
     end
     %convert from int24 from int16
     dataRAW(:,i) = round(SamplesNRD/2^4);
 end
 
-data.NRD = dataRAW;
+datum.NRD{ii} = dataRAW;
+end
+
 end

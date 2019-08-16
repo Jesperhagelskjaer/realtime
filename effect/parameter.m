@@ -1,31 +1,29 @@
-function [par] = parameter()
+function [par,datum] = parameter()
+% The path to the cat before and after light pulse
 
-par.lightPath           =  'P:\AU256873\recording\2019-07-09_13-16-56\';
-%par.lightPath           = 'P:\AU256873\recording\2019-05-21_10-21-44\';
-
-par.path                = 'P:\AU256873\recording\2019-07-09_12-23-51\'; % 'openEphys' only: where raw files are
-
+[par] = pathFolder();                         
+                           
+                           
 par.rezName             = 'rezFMerged'; % 'rezDMMerged.mat';  %used only for OE
 par.datatype            = 'digiLynxNRD';% (digiLynxCSC/digiLynxNRD)
                                    
-par.before              = 50;
-par.after               = 50;
+par.interval            = [-50 150];
 
-par.template_LFP        = {'ch',[29]}; %'temlate = 'tp' parameter 'all' or which template [... 2 3 ...] 
-par.chs                 = [29 30 31 32]; %LFP EFFECT
+par.chs                 = {'ch',[21 22 23 24]}; %'temlate = 'tp' parameter 'all' or which template [... 2 3 ...] 
 
 par.template            = 3;
 
 par.useBitmVolt         = 'Y'; %change the scale from bits to Volt (Y/N) 
-par.signalInverted      = 'Y'; %Invert the signal -/+ (Y/N)     
+par.signalInverted      = 'N'; %Invert the signal -/+ (Y/N)     
 
-par.xAxis               = [-50:50]; %-30:30
+par.shifted             = 14;   %correction  length for difference in TTL and maximum peak used in DSort
+par.spatial             = 32;   %total channels count
 
-par.shifted             = 14;   %correction in index for difference in TTL and maximum peak used in DSort
-par.spatial             = 32;
+%command 'nrd' csc 
+par.filtertype          = {'Y','butter','bandpass',1,'csc'}; %
+par.filtering           = {300,5000,30000,6}; 
 
-par.filtertype          = {'Y','butter','bandpass',1};
-par.filtering           = {300,5000,30000,1};
+datum                   = []; %dummy variable to save nrd files
 
 end
 

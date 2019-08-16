@@ -1,5 +1,7 @@
 function [data] = filterMain(par,data,string)
 
+if strcmp(par.filtertype{1},'Y') 
+
 if (isfield(data,'NRD') && strcmp(string,'NRD'))
 
 tic
@@ -25,7 +27,7 @@ data.dataF = dataF;
 
 time = toc;
 fprintf('%-20s %2.2f %-10s\n', '- finished   - Elepased time',time,'seconds')
-
+end
 end
 end
 

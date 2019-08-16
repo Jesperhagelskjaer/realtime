@@ -1,19 +1,56 @@
-function [] = plotOneTrace(par,data,TTL_number,total)
+%function [] = plotOneTrace(par,data,TTL_number,total)
+function [] = plotOneTrace(par,data,varargin)
 
 
+% 'tace', [7] single trace - [1 5] plot the range of TTL  or all  - which
+% TTL to take out all the TTL of the recording
+% 'path', 2 or all- which recording to look at
 
-
-if strcmp(total,'single') == 1
-    for i = 1:size(data,2)
-        figure;
-        plot(par.xAxis,data(:,i,TTL_number))
+if find(strcmp(varargin,'trace'))
+    TTL_number = varargin{find(strcmp(varargin,'trace')) + 1}; %create better method
+    if size(TTL_number,2) > 1
+        TTL_Start = TTL_number(1);
+        TTL_End = TTL_number(2);
+    else
+        TTL_Start = TTL_number(1);
+        TTL_End   = TTL_number(1);
+        
     end
 else
-    figure
-    surf(data(:,:,TTL_number))
-end
+    TTL_number = 'all'; %not made yet
+    TTL_Start = 1;
 end
 
+xAxis = par.interval(1):par.interval(2);      
+
+if find(strcmp(varargin,'path'))
+    pathNr = varargin{find(strcmp(varargin,'path'))+1}; %create better method
+    pathStart = pathNr;
+    if size(data,2) > pathNr
+        pathNr = 1;
+        fprintf('Error acquired in the path set to the first path')
+    end
+else
+    pathNr = size(data,2);
+    pathStart = 1;
+end
+
+
+for i = pathStart:pathNr %figure for each path
+    figure
+    if strcmp(TTL_number,'all')
+        TTL_End = size(data{1,i},3);
+    end
+    for ii = 1:size(data{1,i},2) %the number of channels
+        subplot(size(data{1,pathNr},2),1,ii)
+        hold on
+        handleFigurePlot
+        for iii = TTL_Start:TTL_End
+            plot(xAxis,data{1,i}(:,ii,iii))
+        end
+    end
+end
+end
 
 
 
