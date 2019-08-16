@@ -36,7 +36,7 @@ end
 %[dataJSearchF] = TTL_data(par,TimestampsEvent,TTLs,dataF);
 %compare2GUI(par,TimestampsEvent,TTLs,dataF)
 Spike2Trigger_delay(par,dataJSearchF)
-LFP_delay(par,dataJSearchF,1,200)
+LFP_delay(par,dataJSearchF,1,150)
 
 
 
