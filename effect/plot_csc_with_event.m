@@ -16,7 +16,7 @@ function [] = plot_csc_with_event(par,i)
 
 i = 29;
 
-fullNameCNS = strcat(par.path,'/csc/CSC',num2str(i),'.ncs');
+fullNameCNS = strcat(par.path{1},'csc/CSC',num2str(i),'.ncs');
 
 
 %% Extract data from NCS file into Matlab workspace for processing

@@ -23,7 +23,7 @@ else
     printf("Wrong filter")
     exit();
 end
-data.dataF = dataF;
+data.NRD_F = dataF;
 
 time = toc;
 fprintf('%-20s %2.2f %-10s\n', '- finished   - Elepased time',time,'seconds')

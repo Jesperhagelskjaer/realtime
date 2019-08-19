@@ -1,9 +1,10 @@
-function [data,Timestamps,m] = loadCSC(path,ch)
+function [data,Timestamps,m] = loadCSC(par,path,ch)
     
     fullNameCNS = strcat(path,'csc/CSC',num2str(ch),'.ncs');
     [Timestamps, ChannelNumbers, SampleFrequencies,NumberOfValidSamples, Samples, Header] = Nlx2MatCSC(fullNameCNS,[1 1 1 1 1], 1, 1, [] );
-    
-    Samples = Samples * str2double(Header{17,1}([13:end]))/1e-6;
+    if strcmp(par.useBitmVolt,'Y')  
+        Samples = Samples * str2double(Header{17,1}([13:end]))/1e-6;
+    end
     [m,n] = size(Samples);
     data = reshape(Samples,[1,n*m]);
     

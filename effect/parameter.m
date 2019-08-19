@@ -5,11 +5,10 @@ function [par,datum] = parameter()
                            
                            
 par.rezName             = 'rezFMerged'; % 'rezDMMerged.mat';  %used only for OE
-par.datatype            = 'digiLynxNRD';% (digiLynxCSC/digiLynxNRD)
-                                   
-par.interval            = [-50 150];
+par.datatype            = {'csc','nrd'};      %     'csc'                         
+par.interval            = [-50 300];
 
-par.chs                 = {'ch',[21 22 23 24]}; %'temlate = 'tp' parameter 'all' or which template [... 2 3 ...] 
+par.chs                 = {'ch',[5 6 7 8]}; %'temlate = 'tp' parameter 'all' or which template [... 2 3 ...] 
 
 par.template            = 3;
 
@@ -20,7 +19,7 @@ par.shifted             = 14;   %correction  length for difference in TTL and ma
 par.spatial             = 32;   %total channels count
 
 %command 'nrd' csc 
-par.filtertype          = {'Y','butter','bandpass',1,'csc'}; %
+par.filtertype          = {'Y','butter','bandpass',2,'csc'}; %
 par.filtering           = {300,5000,30000,6}; 
 
 datum                   = []; %dummy variable to save nrd files
