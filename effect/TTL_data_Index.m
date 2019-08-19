@@ -1,5 +1,8 @@
 function [dataJSearchF,dataJSearchF_shift,indexSampleLight] = TTL_data_Index(par,TTLs,TTLs_time,datum,varargin)
 
+%'type' _> 'csc', 'nrd'
+
+
 if find(strcmp(varargin,'type'))
     if strcmp(varargin{find(strcmp(varargin,'type')) + 1},'csc')
         dataF =  datum.CSC;
