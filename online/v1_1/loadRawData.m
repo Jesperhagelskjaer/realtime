@@ -1,4 +1,4 @@
-function [dataRAW,par] = loadRawData(par,datum)
+function [datum,par] = loadRawData(par,datum)
 
 tic
 fprintf('%-20s','Loading started')

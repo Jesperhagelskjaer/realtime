@@ -1,8 +1,10 @@
 
-for i = 1:6
 
-fprintf('%d',i);
-pause
-fprintf(repmat('\b', 1, 1)); 
+for i = 1:5
+
+fprintf('32 out of %d',i)
+pause(1)
+if < 
+fprintf(repmat('\b', 1, 11 )); 
  
 end

@@ -1,4 +1,4 @@
-function [ par,dataFilt1,data] = filterMain(par,dataRAW,iFilH,iFilL,data )
+function [ par,datum] = filterMain(par,dataRAW,iFilH,iFilL,datum )
 tic
 fprintf('%-20s','Filtering started')
 type = par.filtertype;
@@ -26,7 +26,7 @@ end
 % end
 
 
-data.dataFilt1 = dataFilt1;
+datum.dataF = dataFilt1;
 time = toc;
 fprintf('%-20s %2.2f %-10s\n', '- finished   - Elepased time',time,'seconds')
 end

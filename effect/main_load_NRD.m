@@ -1,11 +1,19 @@
 function [datum] = main_load_NRD(par,datum,path)
 
 if any(strcmpi(par.datatype,'nrd'))
+    
     for ii = 1:size(par.path,1)
-        
+       fprintf('Loading channels [nrd]: ') 
         for i = 1:length(par.chs{2})
             ch = par.chs{2}(i);
-            fprintf('%0.0f - ', i )
+            
+            %fprintf('%0.0f - ', i )
+            if i > 1
+                fprintf(repmat('\b', 1, 10 ));
+            end
+            
+            fprintf('%d out of %d',length(par.chs{2}),i)
+            
             NameNRD = 'CheetahRawData.nrd';
             fullNameNRD = strcat(path{ii},'\nrd\',NameNRD);
             [Timestamps, SamplesNRD, Header] = Nlx2MatNRD(fullNameNRD,ch-1 ,[1 1], 1, 1, [] );
@@ -24,6 +32,7 @@ if any(strcmpi(par.datatype,'nrd'))
         end
         
         datum.NRD{ii} = dataRAW;
+        fprintf('\n')
     end
     datum.Timestamps_NRD{ii} = Timestamps;
     

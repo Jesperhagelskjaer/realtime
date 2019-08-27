@@ -7,6 +7,7 @@ par.dataLoad = 'NRD'; % OE:openEphys, DL
 par.path             = 'P:\AU256873\recording\2019-08-20_11-00-08\nrd\';
 par.rezName          = 'rezFinalTest'; % 'rezDMMerged.mat';  %used only for OE
 par.data             = 'example.dat';         %used only for OE
+
 par.signalInverted   = 'N';
 par.SAU              = 'Y'; %save and upload data and template to HPP
 par.pSmallTemplate   = 'Y';
@@ -24,7 +25,7 @@ par.jitter = 10;
 par.spatial = 32;
 
 
-
+par.AllTemplate = 'Y'; %y
 par.template = 2; % [55];
 par.threshold = 0.80;   % NCC score 0.5 collect most of them
 par.WindowN = -35;      %-35;  %abs(par.WindowN)+abs(par.WindowP)<= 17 the HPP can handle max 17 samples in length

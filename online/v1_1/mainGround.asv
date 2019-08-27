@@ -13,11 +13,11 @@ timerVal = tic;
 
 [rez] = loadRez(par);
 
+plotA
+
 while 1 
         
-    [par,datum] = filterMain(par,datum.dataRAW,1,1,datum);
-    
-    plotRealDataTemplate(par,datum.dataF,rez)
+    [par,datum.dataF] = filterMain(par,datum.dataRAW,1,1);
     
     datum.dataRawShort = datum.dataRAW(1:par.lengthGroundt,:);
     
