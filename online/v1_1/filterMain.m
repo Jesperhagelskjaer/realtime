@@ -1,34 +1,30 @@
-function [ par,datum] = filterMain(par,dataRAW,iFilH,iFilL,datum )
+function [datum] = filterMain(par,data,datum)
+
+if strcmp(par.filtertype{1},'Y') 
+
 tic
 fprintf('%-20s','Filtering started')
-type = par.filtertype;
+type = par.filtertype{2};
 
 if (strcmp(type,'butter')) %% No correction since Dsort is based on butterworth filter
-    dataFilt1 = filterButter(par.fslow(iFilL),par.fshigh(iFilH),dataRAW,par); %butterworth
-    par.filtershift = par.order/2;
+    dataF = filterButter(par,data); %butterworth
 elseif (strcmp(type,'ellip'))
-    dataFilt1 = filterEllip(par.fslow(iFilL),par.fshigh(iFilH),dataRAW,par); %butterworth
+    %dataFilt1 = filterEllip(jesper.fslow(iFilL),jesper.fshigh(iFilH),dataRAW,jesper); %butterworth
 elseif (strcmp(type,'rect'))
-    par.filtershift = par.TAPS/2; %Due to the delayline
-    dataFilt1 = filterRect(par.fslow(iFilL),par.fshigh(iFilH),dataRAW,par); %rect
+    %jesper.filtershift = jesper.TAPS/2; %Due to the delayline
+    %dataFilt1 = filterRect(jesper.fslow(iFilL),jesper.fshigh(iFilH),dataRAW,jesper); %rect
 elseif (strcmp(type,'filterCpp'))
-    par.filtershift = par.order;
-    filterCheckCpp(dataRAW);
+    %jesper.filtershift = jesper.order;
+    %filterCheckCpp(dataRAW);
 else
     printf("Wrong filter")
     exit();
 end
+datum.dataF = dataF;
 
-% if par.GT > 0
-%     par.GT = par.GT + par.filtershift;
-%     plotAddTemplateData(par,dataFilt1)
-% 
-% end
-
-
-datum.dataF = dataFilt1;
 time = toc;
 fprintf('%-20s %2.2f %-10s\n', '- finished   - Elepased time',time,'seconds')
+
+end
 end
 
-%par.filtershift = 0; butter

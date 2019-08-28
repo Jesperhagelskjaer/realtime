@@ -4,7 +4,7 @@ spatial = jesper.spatial;
 spikeCluster = rez.st(:,8); % Cluster ID
 
 timeStamps = rez.st(:,1);
-timeStamps = timeStamps(timeStamps< jesper.lengthrecording);
+%timeStamps = timeStamps(timeStamps< jesper.lengthrecording);
 
 spikeCluster = spikeCluster(1:length(timeStamps));
 
@@ -49,7 +49,9 @@ end
 
 jesper.reCalculateTemplate{i} = templateAverageSmall;
 jesper.minIndexReCalculateTemplate{i} = temporal-minI;
-jesper.GT{i} = timeStampsCluster(find(timeStampsCluster < jesper.lengthGroundt));
+%jesper.GT{i} = timeStampsCluster(find(timeStampsCluster < jesper.lengthGroundt));
+jesper.GT{i} = timeStampsCluster;%(find(timeStampsCluster < jesper.lengthGroundt));
+
 end
 end
 

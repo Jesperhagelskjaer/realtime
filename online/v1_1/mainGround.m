@@ -7,19 +7,19 @@ clearvars -except datum.dataRAW
 close all
 timerVal = tic;
 
-[par,datum] = parameter();
+[par] = parameter();
 
 [datum,par] = loadRawData(par,datum);
 
 [rez] = loadRez(par);
 
+plotRealDataTemplate(par,datum.dataF,rez);
+
 while 1 
         
-    [par,datum] = filterMain(par,datum.dataRAW,1,1,datum);
+    [datum] = filterMain(par,datum.dataRAW,datum);
     
-    plotRealDataTemplate(par,datum.dataF,rez)
-    
-    datum.dataRawShort = datum.dataRAW(1:par.lengthGroundt,:);
+    %datum.dataRawShort = datum.dataRAW(1:par.lengthGroundt,:);
     
     [par] = recalculateNCCTemplate(datum.dataF,par,rez,1,1);
     
@@ -27,11 +27,11 @@ while 1
     
     %[par] = allChannelsCoherenct(dataF,par);
     
-    %[par] = belongotherClus(par,dataF,1,1,rez,'coherency',0,dataF);
+   % [par] = belongotherClus(par,datum.dataF,1,1,rez,'coherency',0,datum.dataF); %not longer correct
     
     [par] = gradientCalculation(par,datum.dataF,rez);
     
-    [par] = belongotherClus(par,datum.dataF,1,1,rez,'gradient',0,datum.dataF);
+    %[par] = belongotherClus(par,datum.dataF,1,1,rez,'gradient',0,datum.dataF);
     
     [par] = guiMain(par);
         

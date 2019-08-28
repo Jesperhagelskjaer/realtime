@@ -1,0 +1,9 @@
+function [] = plot3DSpikes(jesper)
+
+
+figure
+plot( jesper.holderGT (:,1), jesper.holderGT(:,2),'*' )
+
+
+end
+

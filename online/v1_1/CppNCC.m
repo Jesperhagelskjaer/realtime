@@ -9,7 +9,7 @@ temporal = abs(par.WindowN(iCHT))+ par.WindowP(iCHTre)+1;
 for ii = 1:length(par.template)
 
 timeDSortSearch = rez.st(find(rez.st(:,8) == par.template(ii)),1);
-timeDSortSearch( timeDSortSearch > par.lengthGroundt) = [];   
+%timeDSortSearch( timeDSortSearch > par.lengthGroundt) = [];   
     
 mChls = par.mainChannel{ii};  
 figure

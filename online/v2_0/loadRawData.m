@@ -9,14 +9,15 @@ if ~exist('datum.dataRAW','var')
         
         Fid = fopen(strcat(par.path,par.data),'r');
         dataRAW = fread(Fid, [par.spatial inf], '*int16')'; %inf
-        
-    elseif strcmp(par.dataLoad,'DL')
+    end
+    
+    if any(strcmp(par.dataLoad,'csc'))
         
         fprintf('Loading channels [csc]: ')
         for i = 1:par.spatial
             printChannel(par,i)
             
-            fullNameCNS = strcat(par.path,'CSC',num2str(i),'.ncs');
+            fullNameCNS = strcat(par.path,'\csc\CSC',num2str(i),'.ncs');
             [Timestamps, ChannelNumbers, SampleFrequencies,NumberOfValidSamples, Samples, Header] = Nlx2MatCSC(fullNameCNS,[1 1 1 1 1], 1, 1, [] );
             
             [m,n] = size(Samples);
@@ -28,8 +29,12 @@ if ~exist('datum.dataRAW','var')
             
         end
         par.bitmVolt = str2double(Header{17,1}([13:end]))/1e-6;
-        [dataRAW] = invertSignal(dataRAW,par);
-    elseif strcmp(par.dataLoad,'NRD')
+        [dataRAW] = invertSignal(par,dataRAW);
+        datum.data_CSC_RAW = dataRAW;
+        fprintf('\n')
+    end
+     
+    if any(strcmp(par.dataLoad,'csc'))
         
         fprintf('Loading channels [nrd]: ')
         for i = 1:par.spatial
@@ -37,7 +42,7 @@ if ~exist('datum.dataRAW','var')
             printChannel(par,i)
             
             %fprintf('%0.0f - ', i )
-            NameNRD = 'CheetahRawData.nrd';
+            NameNRD = '\nrd\CheetahRawData.nrd';
             fullNameNRD = strcat(par.path,NameNRD);
             [~, SamplesNRD, Header] = Nlx2MatNRD(fullNameNRD,i-1 ,[1 1], 1, 1, [] );
             %         figure
@@ -48,20 +53,13 @@ if ~exist('datum.dataRAW','var')
             end
             %convert from int24 from int16
             dataRAW(:,i) = round(SamplesNRD/2^4);
-            
-            %     figure
-            %     plot(dataRAW(:,i))
-            %     figure
-            %     plot(SamplesNRD(i,:))
-            %     drawnow
-            
-            
+                                
         end
+        
+        datum.data_NRD_RAW = dataRAW;
         fprintf('\n')
     end
-    
-    datum.dataRAW = dataRAW;
-    
+     
     time = toc;
     %fprintf('%-20s %2.2f %-10s\n', '- finished   - Elepased time',time,'seconds')
     

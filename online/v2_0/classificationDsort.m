@@ -1,19 +1,20 @@
-function [par] = belongotherClus(par,dataFilt,iCHT,iCHTre,rez,stringToPrint,plotting,dataFF)
+function [par] = classificationDsort(par,dataF,rez)
 
 jitter = par.jitter;
-clusterDSort = rez.st(:,end) ;%rez.st(rez.st(:,1) < par.lengthGroundt,8);
+clusterDSort = rez.st(rez.st(:,1) < par.lengthGroundt,8);
 
+shift = par.order/2;
 
-time = rez.st(:,1);%rez.st(find(rez.st(:,1) < par.lengthGroundt),1);
+time = rez.st(find(rez.st(:,1) < par.lengthGroundt),1) + shift;
 
 
 for ii = 1:length(par.template)
                                                                               
-    timeDSortSearch = rez.st(find(rez.st(:,8) == par.template(ii)),1);
-    %timeDSortSearch( timeDSortSearch > par.lengthGroundt) = [];
+    timeDSortSearch = rez.st(find(rez.st(:,8) == par.template(ii)),1) ;
+    timeDSortSearch( timeDSortSearch > par.lengthGroundt) = [];
     
-    %JSortTime = par.passedGradient{ii} + par.filtershift - par.minIndexReCalculateTemplate{ii};
-    JSortTime = par.passedGradient{ii} - par.minIndexReCalculateTemplate{ii};
+    JSortTime = par.passed + shift;
+    
     spikeHolder = nan(length([-10:40]),par.spatial,length(JSortTime));
     spikeHolderHard = spikeHolder;
     spikeHolderMiss = spikeHolder;
@@ -46,7 +47,7 @@ for ii = 1:length(par.template)
     for i = 1:length(timeDSortSearch)-1
         holder = ismembc(JSortTime,timeDSortSearch(i)+[-jitter:jitter]);
         if (any(holder))
-            mm = mm +1
+            mm = mm +1;
             clusterholderD = [clusterholderD JSortTime(holder)']; %Time looking only for one neuron
             spikeHolderD(:,:,mm) = dataFilt([-10:40]+timeDSortSearch(i),:);
             spikeHolderHardD(:,:,mm) = dataFF([-10:40]+timeDSortSearch(i),:);
@@ -71,7 +72,7 @@ for ii = 1:length(par.template)
     surf(nanmean(spikeHolderHard,3))
     title('F-B Butterwards')
     subplot(2,2,4)
-    edges = [0.5:100.5];
+    edges = [1:150];
     histogram(clusterholder',edges)
     
     par.extraCluster{ii} = clusterholder;
@@ -97,3 +98,7 @@ end
 
 
 end
+
+
+
+

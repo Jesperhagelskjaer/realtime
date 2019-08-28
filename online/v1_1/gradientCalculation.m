@@ -63,7 +63,6 @@ if 1
         [bincounts1] = histc(holderGT(:,i+1),binranges);
         [bincounts2] = histc(holder(:,i+1),binranges);
         [bincounts3] = histc(matrixHolderPassed(:,i+1),binranges);
-        length(matrixHolderPassed(:,i+1))
         subplot(lgt1,3,1+3*i)
         bar(binranges,bincounts1,'histc')
         title('DSort')
