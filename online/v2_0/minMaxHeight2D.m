@@ -34,10 +34,10 @@ indexCheck(isnan(indexCheck)) = [];
 par.passed = indexCheck;
 
 if 1
-    lgt1 = length(par.mainChannel);
+    lgt1 = length(par.template{2});
     figure('NumberTitle', 'off', 'Name','Cutting in amplitude');
     
-    for i = 1:length(par.mainChannel)
+    for i = 1:length(par.template{2})
         
         if strcmp(par.useBitmVolt,'Y')
             binranges = -300:10:50;

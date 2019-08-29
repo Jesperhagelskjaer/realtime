@@ -1,4 +1,16 @@
-function [par] = allChlsMean(par,dataF,rez)
+function [par] = allChlsMean(par,datum_,rez,varargin)
+
+
+if find(strcmp(varargin,'ext'))
+    version = varargin{find(strcmp(varargin,'ext')) + 1}; %create better method
+    if strcmp(version,'nrd')
+        dataF = datum_.data_NRD_F;
+    elseif strcmp(version,'csc')
+        dataF = datum.data_CSC_F;
+    end
+end
+
+
 
 tic
 fprintf('%-20s','AllChlsMean started')

@@ -1,7 +1,7 @@
 function [par] = calMinMax(par,dataF,rez)
 
 temporal    = par.lengthTemplate;
-mChls       = par.mainChannel;
+mChls       = par.template{2};
 indexCheck  = par.passed;
 
 

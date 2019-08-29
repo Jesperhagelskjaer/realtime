@@ -1,13 +1,25 @@
-function [par] = cutRecalculateNCCTemplate(dataF,par)
+function [par] = cutRecalculateNCCTemplate(par,datum_,varargin)
 
 tic
 fprintf('%-20s','Cutting started')
 
+if find(strcmp(varargin,'ext'))
+    version = varargin{find(strcmp(varargin,'ext')) + 1}; %create better method
+    if strcmp(version,'nrd')
+        dataF = datum_.data_NRD_RAW;
+    elseif strcmp(version,'csc')
+        dataF = datum_.data_CSC_RAW;
+    end
+end
+
+
+
+
 templateAverageBig = par.templateAverageBig;
 
 
-chN = par.mainChannel;
-chMain = par.chMain;
+chN = par.template{2};
+chMain = par.template{3}; %change function
 dataAdTempF = dataF; %change naming
 
 
@@ -33,10 +45,10 @@ template = templateAverageBig(minI:maxI,:);
 lengthLeff = par.maxL_template - size(template,1);
 lengthTemplate = size(template,1);
 for i = 1:lengthLeff
-    value1_1 = abs(templateAverageBig(minI-1,par.chMain));
-    value1_2 = abs(templateAverageBig(maxI+1,par.chMain));
-    value1 = abs(templateAverageBig(minI,par.chMain)) - abs(templateAverageBig(minI-3,par.chMain)) ;
-    value2 = abs(templateAverageBig(maxI,par.chMain)) - abs(templateAverageBig(maxI+3,par.chMain));
+    value1_1 = abs(templateAverageBig(minI-1,chMain));
+    value1_2 = abs(templateAverageBig(maxI+1,chMain));
+    value1 = abs(templateAverageBig(minI,chMain)) - abs(templateAverageBig(minI-3,chMain)) ;
+    value2 = abs(templateAverageBig(maxI,chMain)) - abs(templateAverageBig(maxI+3,chMain));
     if ( value1_1 > diffV || value1_2 > diffV )        
         if ( value1 > value2)
             minI = minI - 1;

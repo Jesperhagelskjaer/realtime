@@ -1,11 +1,20 @@
-
-clc
-clearvars -except datum.dataRAW
-close all
-
 if ~exist('datum','var')
-   datum = []; 
+    datum = [];
 end
+
+close all
+clc
+
+[holder] = clearAllExpectDatum(datum);
+
+if ~isempty(holder)
+    clearvars -except holder %before very carefull of this, will not work when changing the path
+    datum.data_NRD_RAW = holder;
+    clear holder
+else
+    clear
+end
+
 
 [par]               = parameter();
 
@@ -13,26 +22,38 @@ end
 
 [datum,par]         = loadRawData(par,datum);
 
-[datum]             = filterMain(par,datum,'ext','nrd');
+while 1
+    
+    [datum]             = filterMain(par,datum,'ext','nrd');
+    
+    plotRealDataTemplate(par,datum,rez,'ext','nrd');
+    close all
+    [par]               = recalculateTemplate(par,rez,datum,'ext','nrd');
+    
+    [par]               = coherenceParameter(par,datum,'ext','nrd');
+    
+    %Used to calculate the template length
+    [par]               = cutRecalculateNCCTemplate(par,datum,'ext','nrd');
+    
+    %old way to calcualte template
+    %[par]               = recalculateNCCTemplate(par,datum,rez,'ext','nrd');
+    
+    [par]               = NCC(par,datum,rez,'ext','nrd');
+    
+    [par]               = allChlsMean(par,datum,rez,'ext','nrd');
+    
+    [par]               = minMaxHeight2D(par,datum,rez,'ext','nrd');
+    
+    
+    [par] = guiMain(par);
+    
+    if isempty(par.answer)
+        break
+    end
+    
+end
 
-%[par]               = recalculateTemplate(par,rez,datum,'ext','nrd');
 
-[par]               = coherenceParameter(par,dataF);
-
-% Used to calculate the template length
-%[par]               = cutRecalculateNCCTemplate(dataF,par);
-%old way to calcualte template
-[par]               = recalculateNCCTemplate(par,datum,rez,'ext','nrd');
-
-[par]               = NCC(par,datum,rez,'ext','nrd');
-
-[par]               = allChlsMean(par,dataF,rez);
-
-%show the 2D of the minMax
-%[par]               = minMaxHeightSVM2D(par,dataF,rez);
-
-[par]               = minMaxHeight2D(par,datum,rez,'ext','nrd');
-                 
 
 
 % if strcmp(par.upload,'Y')
@@ -42,13 +63,14 @@ end
 %     %setupHPPmatlab(par);
 %     SetupHPP2(par)
 % end
+%show the 2D of the minMax
+%[par]               = minMaxHeightSVM2D(par,dataF,rez);
 
 
-
-figure
-plot(datum.data_NRD_F( 1:1e5,1))
-hold on
-plot(datum.data_NRD_RAW( 1:1e5,1))
+% figure
+% plot(datum.data_NRD_F( 1:1e5,1))
+% hold on
+% plot(datum.data_NRD_RAW( 1:1e5,1))
 
 
 

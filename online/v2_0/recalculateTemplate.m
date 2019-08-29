@@ -20,7 +20,7 @@ timeStamps = st(:,1);
 windowBig = -par.sizeTemplateIntoRawData:par.sizeTemplateIntoRawData;
 temporalBig = length(windowBig);
 
-timeStampsCluster = timeStamps(find(spikeCluster == par.template));%+par.filtershift;
+timeStampsCluster = timeStamps(find(spikeCluster == par.template{1}));%+par.filtershift;
 
 
 templateStackBig = nan(temporalBig,spatial,length(timeStampsCluster));

@@ -6,7 +6,7 @@ function [par] = allChannelsMean(par,data,strV)
 windowT = 1:par.lengthTemplate;
 
 value = par.stdValue;
-chN = par.mainChannel;
+chN = par.template{2};
 indexCheck = par.passed;
 allChMinusMain = 1:par.spatial;
 allChMinusMain(chN) = [];

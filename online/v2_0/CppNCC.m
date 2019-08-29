@@ -1,7 +1,7 @@
 function [ par ] = CppNCC(par,dataFilt,stringValue)
 
 temporal = par.lengthTemplate;
-mChls = par.mainChannel;
+mChls = par.template{2} ;
 
 template = double(par.reCalculateTemplate(:,mChls));
 data = double(dataFilt(:,mChls));
