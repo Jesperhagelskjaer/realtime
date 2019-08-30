@@ -1,20 +1,15 @@
-if ~exist('datum','var')
-    datum = [];
-end
-
 close all
 clc
 
-[holder] = clearAllExpectDatum(datum);
-
-if ~isempty(holder)
+try
+    [holder] = clearAllExpectDatum(datum);
     clearvars -except holder %before very carefull of this, will not work when changing the path
     datum.data_NRD_RAW = holder;
     clear holder
-else
+catch
     clear
+    datum = [];
 end
-
 
 [par]               = parameter();
 
