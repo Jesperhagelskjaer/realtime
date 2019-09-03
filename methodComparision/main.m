@@ -2,19 +2,6 @@ clc
 clear all
 close all
 
-% swt = [2 1]
-% t_v(1) = 1;
-% t_v(2) = 2;
-% 
-% b = t_v(swt)
-% 
-% t{1} = 1;
-% t{2} = 2;
-% 
-% b_t = t(swt)
-
-
-
 datum = [];
 
 [par] = parameter();

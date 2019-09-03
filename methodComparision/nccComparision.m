@@ -35,7 +35,7 @@ datum.shuffleVector = shufleVector;
 
 datum.tSpikes_DSort_cor = datum.tSpikes_DSort(shufleVector);
 datum.spikes_DSort_cor   = datum.spikes_DSort(shufleVector);
-plotCorredTemplate(par,datum)
+%plotCorredTemplate(par,datum)
 correlationSpikeTime(par,datum)
 %waveformDiffernce(par,datum)
 

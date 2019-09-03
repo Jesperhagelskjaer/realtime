@@ -88,8 +88,10 @@ for i = 1:length(C_PCA)
 end
 for m = 1:size(score_h,2)
     for n = 1:size(score_h,2)
-        d2_mahal(m,n) = mahal(mean(score_h{m}),score_h{n}); %Compute the squared Euclidean distance of each observation in Y from the mean of X . 
+        d2_mahal(m,n) = mahal(mean(score_h{m}),score_h{m}(1:10,3)); %Compute the squared Euclidean distance of each observation in Y from the mean of X .
+        %d2_mahal_t(m,n) = mahal(score_h{m},score_h{m}); %Compute the squared Euclidean distance of each observation in Y from the mean of X .
     end
+    
 end
 d2_mahal
 end
