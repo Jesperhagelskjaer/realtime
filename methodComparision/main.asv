@@ -16,7 +16,7 @@ datum = [];
 
 [datum] = main_trace(par,rez,datum,'dsort','MClust');
 
-[datum] = nccComparision(par,rez,datum);
+nccComparision(par,datum);
 
-PCA_Mahanobilis_allCh(par,datum,'C_PCA',[],'alignment','min','normalisation','minMax') %
+
 

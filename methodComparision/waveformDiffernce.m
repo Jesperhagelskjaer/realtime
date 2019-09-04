@@ -41,8 +41,6 @@ for i = 1:largest
     end
 end
 
-
-
 sample = rand(3,3);
 for i = 1:size(t_DS_c,2)+1
     dSort{i} = strcat('Dsort_T',num2str(i));
