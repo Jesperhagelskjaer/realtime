@@ -1,6 +1,5 @@
 function [datum] = traceDSort(par,rez,datum)
 
-size1 = size(datum.CSC_F,1);
 data = datum.CSC_F;
 
 clustNr = [];

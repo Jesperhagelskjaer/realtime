@@ -1,5 +1,4 @@
-function [datum] = nccComparision(par,rez,datum)
-
+function [NCC_value2] = nccComparision(par,datum)
 
 for i = 1:size(datum.template_mean_DSort,2)
     template = datum.template_mean_DSort{i};
@@ -13,43 +12,6 @@ for i = 1:size(datum.template_mean_DSort,2)
 
     end
 end
-holder = NCC_value2;
-shufleVector = nan(1,max([size(holder,1),size(holder,2)]));
-
-for j = 1:min(size(holder)) %look into which have fewer cluster  
-    maximum = max(max(holder));
-    [m,n]=find(holder==maximum);
-    shufleVector(1,m) =  n; 
-    holder(m,:) = nan;
-    holder(:,n) = nan;
-end
-
-for i = 1:length(shufleVector)
-    index = find(shufleVector == i);
-    if isempty(index)
-        shufleVector(find(isnan(shufleVector), 1)) = i;
-    end
-end
-
-datum.shuffleVector = shufleVector;
-
-datum.tSpikes_DSort_cor = datum.tSpikes_DSort(shufleVector);
-datum.spikes_DSort_cor   = datum.spikes_DSort(shufleVector);
-plotCorredTemplate(par,datum)
-[datum] = correlationSpikeTime(par,rez,datum);
-
-for i = 1:size(datum.template_mean_MClust,2)
-figure
-surf(datum.template_mean_MClust{i})
-title({'MC-',num2str(i)})
-end
-
-for i = 1:size(datum.template_mean_DSort,2)
-figure
-surf(datum.template_mean_DSort{i})
-title({'D',num2str(i)})
-end
-
 
 end
 

@@ -16,7 +16,9 @@ datum = [];
 
 [datum] = main_trace(par,rez,datum,'dsort','MClust');
 
-[datum] = nccComparision(par,rez,datum);
+[datum] = correlate_DS_MC_CL(par,datum,'method','NSSD'); %NCC.,NSSD
+
+[datum] = correlationSpikeTime(par,rez,datum);
 
 PCA_Mahanobilis_allCh(par,datum,'C_PCA',[],'alignment','min','normalisation','minMax') %
 

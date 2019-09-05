@@ -18,7 +18,7 @@ if find(strcmp(varargin,'normalisation'))
     input_normalisation = varargin{find(strcmp(varargin,'normalisation')) + 1};
 end
 
-
+if ~exist('datum.error','var')
 CS_All = datum.CS_All;
 c = []; PCA_matrix = [];
 if exist('input_alignment','var')
@@ -121,7 +121,7 @@ datum.mahal_d = mahal_d;
 
 table_M_Distance(par,datum)
 
-
+end
 
 end
 
