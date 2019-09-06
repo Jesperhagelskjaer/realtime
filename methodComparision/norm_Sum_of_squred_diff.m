@@ -2,30 +2,29 @@ function [NSSD,datum] = norm_Sum_of_squred_diff(par,datum)
 
 
 try
-    test = datum.template_mean_DSort;
+    datum.template_mean_DSort;
 catch
     datum.error = 1;
     datum.errorTxt = 'NO_T_DS';
 end
 
 try
-    test = datum.template_mean_MClust;
+    datum.template_mean_MClust;
 catch
     datum.error = 1;
     datum.errorTxt = 'NO_T_MC';
 end
-NSSD = []
+NSSD = [];
 
-if exist('datum.error','var')
+if ~exist('datum.error','var')
     
 for i = 1:size(datum.template_mean_DSort,2)
-
+    template = datum.template_mean_DSort{i};
     T_n = size(template,1);
     
     for j = 1:size(datum.template_mean_MClust,2)
         
-
-            signal = [zeros(10,4); datum.template_mean_MClust{j}; zeros(10,4)];
+        signal = [zeros(10,4); datum.template_mean_MClust{j}; zeros(10,4)];
 
         for k = 1:size(signal,1)-T_n
             

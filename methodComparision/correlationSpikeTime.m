@@ -15,7 +15,7 @@ if ~exist('datum.error','var')
         c = 1;
         t_DS = datum.tSpikes_DSort_cor{i};
         clusterSeenT = [];
-        holderA_seen = [];holderA_NotSeen = [];
+        holderA_seen = [];holderA_NotSeen = [];t_A = [];
         for ii = 1:length(t_DS)
             clusterSeen = [];
             bool = 1;
@@ -26,6 +26,7 @@ if ~exist('datum.error','var')
                 if ~isempty(index)
                     clusterSeen = [clusterSeen MC];
                     holderA_seen= cat(3,holderA_seen,datum.spikes_DSort_cor{i}(:,:,ii));
+                    t_A = [t_A t_DS(ii)];
                     bool = 0;
                 end
             end
@@ -41,6 +42,7 @@ if ~exist('datum.error','var')
         clusterholderT{i} = clusterSeenT;
         CS_A{i}  = holderA_seen;
         CS_NSI_MC{i}  = holderA_NotSeen;
+        t_A_h{i} = t_A;
     end
     
     for i = 1:size(t_MC_c,2)
@@ -89,6 +91,7 @@ if ~exist('datum.error','var')
     datum.CS_A          = CS_A;
     datum.CS_NSI_MC     = CS_NSI_MC;
     datum.label_WS_All  = label_WS_All; %1 agreemen, 2 NSI_MS, 3 NSI_DS
+    datum.t_A = t_A_h;
     %extraCheckTime(par,rez,datum,4);
     
 end

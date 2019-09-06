@@ -1,6 +1,6 @@
 function [] = PCA_Mahanobilis_allCh(par,datum,varargin)
 
-
+if ~exist('datum.error','var')
 if find(strcmp(varargin,'C_PCA'))
     input_C_PCA = varargin{find(strcmp(varargin,'C_PCA')) + 1};
     if isempty(input_C_PCA)
@@ -18,7 +18,7 @@ if find(strcmp(varargin,'normalisation'))
     input_normalisation = varargin{find(strcmp(varargin,'normalisation')) + 1};
 end
 
-if ~exist('datum.error','var')
+
 CS_All = datum.CS_All;
 c = []; PCA_matrix = [];
 if exist('input_alignment','var')

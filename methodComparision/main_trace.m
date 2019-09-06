@@ -8,7 +8,5 @@ if  any(strcmp(varargin,'MClust'))
     datum = traceMClust(par_,datum);
 end 
 
-
-
 end
 
