@@ -1,8 +1,8 @@
 function [par] = parameter()
 
 
-par.path                = 'O:\ST_Duda\Maria\MM003\2019-02-23_16-32-17';
-%par.path                = 'D:\2019-02-23_16-32-17';
+%par.path                = 'O:\ST_Duda\Maria\MM003\2019-02-23_16-32-17';
+par.path                = 'D:\2019-02-23_16-32-17';
 par.rezName             = 'rezFinal';
 
 
