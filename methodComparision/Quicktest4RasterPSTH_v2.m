@@ -61,20 +61,31 @@ for i = 1:size(datum.CS_A,2)
     SPSTH_s(:,i) = SPSTH;
     SPSTH_SE_S(:,i) = SPSTH_SE;
     
+   
+    figure
+    plot(PSTH)    
+    
+    figure
+    plot(SPSTH)
+    hold on
+    stdshade_sorting(SPSTH, SPSTH_SE, 0.3,'b') 
+    %stdshade_sorting(SpikeRaster, SPSTH_SE, 0.3,'b') 
     clear stimes
 end
+
+
 
 figure
 subplot(2,1,1)
 plot(edges,SPSTH_s)
-handleFigurePlot()
+%handleFigurePlot()
 xlabel(str)
 title('SPSTH s')
 subplot(2,1,2)
 plot(edges,SPSTH_SE_S)
 xlabel(str)
 title('SPSTH SE S')
-handleFigurePlot()
+%handleFigurePlot()
 
 filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.template_LFP{2})/4)-1),'agreement_SPSTH_s.fig');
 savefig(filename)

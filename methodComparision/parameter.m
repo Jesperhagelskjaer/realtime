@@ -10,7 +10,7 @@ par.filtertype          = {'Y','butter','normal','bandpass',2}; %
 par.filtering           = {300,9000,30000,6}; 
 
 
-par.template_LFP        = {0,[17 18 19 20]};
+par.template_LFP        = {0,[29 30 31 32]};
 par.xAxis               = [-10:10];
 par.jitter              = [5];
 
