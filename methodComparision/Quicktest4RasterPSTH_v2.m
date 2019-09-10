@@ -76,26 +76,27 @@ for i = 1:length(unique(datum.label_WS_All))
     
     SPSTH_SE_S_h = SPSTH_SE_S(:,find(datum.label_WS_All ==i));
     
-    colorV = linspace(0.1,1,length(find(datum.label_WS_All ==i)));
-    
+    %colorV = linspace(0.1,1,length(find(datum.label_WS_All ==i)));
+    colorV = {'m','r','b','c','g','w','b''y'};
+    figure
+    hold on
     for j = 1:length(find(datum.label_WS_All ==i))
-        
-        
+              
         SPSTH_SE_S_h2 = SPSTH_SE_S_h(:,j);
         SPSTH_s_h2 = SPSTH_s_h(:,j);
         
         SPSTH_s_h2 = [SPSTH_s_h2';SPSTH_s_h2'];
         SPSTH_SE_S_h2 = [SPSTH_SE_S_h2'; SPSTH_SE_S_h2'];
         
-        stdshade_sorting(SPSTH_s_h2, SPSTH_SE_S_h2, 0.3,'r')
+        stdshade_sorting(SPSTH_s_h2, SPSTH_SE_S_h2, 0.3,colorV{j})
     end
     
     if i == 1
         title('agreement')
     elseif i == 2
-        title('NSI_MC')
+        title('NSI MC')
     else
-        title('NSI_DS')
+        title('NSI DS')
     end
     hold off
     filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.template_LFP{2})/4)-1),'_',str{i},'_SPSTH_s.fig');
