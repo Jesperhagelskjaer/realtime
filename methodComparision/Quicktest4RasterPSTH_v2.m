@@ -52,10 +52,10 @@ for i = 1:size(datum.t_all,2)
     %     subplot(2,1,2)
     %     bar(edges,SpikePETH)
     %
-    DT = 0.02;
-    SIGMA = 0.05;
+    DT = par.DT;
+    SIGMA = par.SIGMA;
     COMP = {[1:TrialN]};
-    VALID_TRIALS = 1:710;
+    VALID_TRIALS = 1:size(SpikeRaster,1);
     [PSTH, SPSTH, SPSTH_SE] = binraster2psth(SpikeRaster,DT,SIGMA,COMP,VALID_TRIALS);
     
     SPSTH_test = [SPSTH;SPSTH];
@@ -66,8 +66,6 @@ for i = 1:size(datum.t_all,2)
     
     SPSTH_s(:,i) = SPSTH;
     SPSTH_SE_S(:,i) = SPSTH_SE;
-    
-
    
     figure
     plot(PSTH)    
@@ -83,7 +81,7 @@ for i = 1:length(unique(datum.label_WS_All))
     
     SPSTH_SE_S_h = SPSTH_SE_S(:,find(datum.label_WS_All ==i));
     
-    %colorV = linspace(0.1,1,length(find(datum.label_WS_All ==i)));
+
     colorV = {'m','r','b','c','g','w','b''y'};
 
     figure
@@ -96,9 +94,10 @@ for i = 1:length(unique(datum.label_WS_All))
         SPSTH_s_h2 = [SPSTH_s_h2';SPSTH_s_h2'];
         SPSTH_SE_S_h2 = [SPSTH_SE_S_h2'; SPSTH_SE_S_h2'];
         
-        stdshade_sorting(SPSTH_s_h2, SPSTH_SE_S_h2, 0.3,colorV{j})
+        stdshade_sorting(SPSTH_s_h2, SPSTH_SE_S_h2, 0.3,colorV{j},edges)
+        handleFigurePlot('seconds')
     end
-    
+    %1 agreement, 2 NSI_MS, 3 NSI_DS
     if i == 1
         title('agreement')
     elseif i == 2
@@ -107,7 +106,9 @@ for i = 1:length(unique(datum.label_WS_All))
         title('NSI DS')
     end
     hold off
-    filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.template_LFP{2})/4)-1),'_',str{i},'_SPSTH_s.fig');
+    blN = num2str(ceil(max(par.template_LFP{2})/4)-1);
+    
+    filename = strcat(par.path,'\jesper\bundle',blN,'_',str{i},'_SIGMA_',num2str(SIGMA),'_DT_',num2str(DT),'_SPSTH_s.fig');
     savefig(filename)
     
 end

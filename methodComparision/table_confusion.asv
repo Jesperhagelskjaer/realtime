@@ -1,36 +1,26 @@
 function [WS_All,label_WS_All,t_all] = table_confusion(par,datum,mid)
 
-CN_A_DS        = mid.CN_A_DS;
-CN_NSI_DS      = mid.CN_NSI_DS;
+t_DS_c = mid.t_DS_c;
+t_MC_c = mid.t_MC_c;
+CS_A           = mid.CS_A;
+clusterholderNonSeen
+%clusterholderT = mid.clusterholderT;
+clusterholderNonSeen = mid.clusterholderNonSeen;
+CS_NSI_MC = mid.CS_NSI_MC;
+clusterholderNonSeen_MC = mid.clusterholderNonSeen_MC;
+CW_NSI_DS = mid.CW_NSI_DS;
+largest = size(t_DS_c,2);
 
+sample = nan(size(t_DS_c,2)+1,size(t_MC_c,2)+1);
 
-%CS_A           = mid.CW_A;
-CW_NSI_DS      = mid.CW_NSI_DS;
-CN_NSI_MC      = mid.CN_NSI_MC;
-
-t_DS_c         = mid.t_DS_c;
-t_MC_c         = mid.t_MC_c;
-t_NSI_DS       = mid.t_NSI_DS;
-t_NSI_MC       = mid.t_NSI_MC;
-%t_A            = mid.t_A_h;
-
-
-% %CN_NSI_MC = mid.CN_NSI_MC;
-% CS_NSI_MC = mid.CS_NSI_MC;
-% clusterholderNonSeen_MC = mid.CN_NSI_MC;
-% CW_NSI_DS = mid.CW_NSI_DS;
-% largest = size(t_DS_c,2);
-%
- sample = nan(size(t_DS_c,2)+1,size(t_MC_c,2)+1);
-
-for i = 1:size(t_DS_c,2)+1 %creates the name for table
+for i = 1:size(t_DS_c,2)+1
     dSort{i} = strcat('Dsort_T',num2str(i));
     if i > size(t_DS_c,2)
         dSort{i} = 'only';
     end
 end
 
-for i = 1:size(t_MC_c,2)+1 %creates the name for table
+for i = 1:size(t_MC_c,2)+1
     Mcluster{i} = strcat('MClust_T ',num2str(i));
     if i > size(t_MC_c,2)
         Mcluster{i} = 'only';

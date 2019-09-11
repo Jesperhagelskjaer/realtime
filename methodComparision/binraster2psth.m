@@ -1,4 +1,4 @@
-function [psth, spsth, spsth_se] = binraster2psth(binraster,dt,sigma,COMP,valid_trials)
+function [psth, spsth, spsth_se] = binraster2psth(binraster,dt,sigma,COMP,valid_trials,edges)
 %BINRASTER2PSTH    PSTH from binned spike raster.
 %   [PSTH, SPSTH, SPSTH_SE] = BINRASTER2PSTH(BINRASTER,DT,SIGMA,COMP,VALID_TRIALS)
 %   calculates PSTH, smoothed PSTH (SPSTH) and standard error of smoothed

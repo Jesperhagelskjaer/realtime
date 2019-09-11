@@ -5,7 +5,6 @@ value = datum.label_WS_All;
 a = 1;b = 1; c = 1;
 for i = 1:length(value)
 
-    %1 agreement, 2 NSI_Mc, 3 NSI_DS
     if (value(i) == 1)
         intry_Text{i} = strcat('Agreement ',num2str(a));
         a = a + 1;
@@ -19,10 +18,11 @@ for i = 1:length(value)
 
 end
 test = datum.mahal_d;
-test = test(:,~all(isnan(test))); %remove all nan in columns
-out = test(all(~isnan(test),2),:); % remove all nan - rows
+A = A(:,~all(isnan(A)));
 
-sTable = array2table(out ,'RowNames',intry_Text,'VariableNames',intry_Text)
+%out = test(all(~isnan(test),2),:); % for nan - rows
+
+sTable = array2table(test ,'RowNames',intry_Text,'VariableNames',intry_Text)
 
 filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.template_LFP{2})/4)-1),'_distance.xlsx');   
 writetable(sTable,filename,'WriteRowNames',true)
