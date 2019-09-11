@@ -64,8 +64,7 @@ for i = 1:size(datum.CS_A,2)
    
     figure
     plot(PSTH)    
-    SPSTH = [SPSTH;SPSTH];
-    SPSTH_SE = [SPSTH_SE;SPSTH_SE];
+    SPSTH = [SPSTH;SPS
     figure
     plot(SPSTH)
     hold on
