@@ -8,13 +8,13 @@ datum = [];
 
 [rez,par] = loadRez(par);
 
-[datum] = loadOpenEphys(par,datum);
+[datum] = main_load_recording(par,datum);
+        
+%[datum] = filterMain(par,datum,'OpenEphys');
 
-[datum] = filterMain(par,datum,'OpenEphys');
+%[datum] = loadMClust(par,datum);        
 
-[datum] = loadMClust(par,datum);        
-
-[datum] = main_trace(par,rez,datum,'dsort','MClust');
+[datum] = main_trace(par,rez,datum,'JSearch');%'dsort','MClust',
 
 [datum] = correlate_DS_MC_CL(par,datum,'method','NSSD'); %NCC.,NSSD
  

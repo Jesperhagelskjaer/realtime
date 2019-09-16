@@ -8,5 +8,10 @@ if  any(strcmp(varargin,'MClust'))
     datum = traceMClust(par_,datum);
 end 
 
+if  any(strcmp(varargin,'JSearch'))
+    datum = traceJSearch(par_,datum,'type','csc');
+end 
+
+
 end
 

@@ -41,7 +41,8 @@ plotOneTrace(par,dataTraceJ_NRD,'time','ms'); %,'trace',[1 200]
 
 %% PCA space
 
-%PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
+PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
+PCA_Mahanobilis_OneCluster(par,dataJSearchF_shift)
 
 %% plot AC AND LFP just for J
 
@@ -53,8 +54,8 @@ plotOneTrace(par,dataTraceJ_NRD,'time','ms'); %,'trace',[1 200]
 %cor_D_J(par,rez,dataCSC_light,indexLight);
 
 %% Plot the raster of the nuerons
-[RasterR1,par] = rasterMain(par,rez);   %create the raster plot
-plotRasterEffectV2(par,rez,RasterR1)
+% [RasterR1,par] = rasterMain(par,rez);   %create the raster plot
+% plotRasterEffectV2(par,rez,RasterR1)
 
 %% One waveform with TTL
 

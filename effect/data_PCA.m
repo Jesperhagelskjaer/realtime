@@ -5,9 +5,10 @@ m = size(dataTraceJ,1)*size(dataTraceJ,2);
 
 data =  reshape(dataTraceJ,[m size(dataTraceJ,3)]);%-meanCh;
 data = data(:,1:min(spikes, size(data,2)));
-
-meanCh = mean(data,2);   %calculate the mean of one channel
 c = ones(1,size(data,2));
+try
+meanCh = mean(data,2);   %calculate the mean of one channel
+
 
 for ii = 1:length(cluster)
    
@@ -20,6 +21,8 @@ for ii = 1:length(cluster)
     c = [c ones(1,size(appenData,2))*(ii+1)];
     
     data = [data appenData];
+end
+catch
 end
 
 

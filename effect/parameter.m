@@ -13,7 +13,7 @@ par.chs                 = {'ch',[5 6 7 8]}; %'temlate = 'tp' parameter 'all' or 
 par.template            = 3;
 
 par.useBitmVolt         = 'Y'; %change the scale from bits to Volt (Y/N) 
-par.signalInverted      = 'N'; %Invert the signal -/+ (Y/N)     
+par.signalInverted      = 'Y'; %Invert the signal -/+ (Y/N)     
 
 par.shifted             = 14;   %correction  length for difference in TTL and maximum peak used in DSort
 par.spatial             = 32;   %total channels count
