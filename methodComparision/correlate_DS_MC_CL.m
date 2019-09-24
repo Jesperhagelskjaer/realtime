@@ -1,7 +1,6 @@
 function [datum] = correlate_DS_MC_CL(par,datum,varargin)
 
-
-    
+   
 if any(strcmp(varargin,'method'))
     input = varargin{find(strcmp(varargin,'method')) + 1};
     if strcmp(input,'NSSD')

@@ -7,7 +7,11 @@ if strcmp(par.AllTemplate,'Y')
         if strcmp(version,'nrd')
             dataF = datum_.data_NRD_F;
         elseif strcmp(version,'csc')
+            try
             dataF = datum_.data_CSC_F;
+            catch
+               dataF = datum_.data_CSC_RAW;
+            end
         end
     end
     
@@ -24,10 +28,16 @@ if strcmp(par.AllTemplate,'Y')
             trace(:,:,ii) = dataF(time(ii)+[-15:14],:);
         end
         
+        %onlyDefined = trace(:,par.template{2},:);
+        
         figure
         surf(mean(trace,3))
         title(num2str(clusters(i)))
         view(0,0)
+%         figure
+%         surf(mean(onlyDefined,3))
+%         title(num2str(clusters(i)))
+%         view(0,0)
         
     end
     

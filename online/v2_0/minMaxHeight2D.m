@@ -8,7 +8,7 @@ if find(strcmp(varargin,'ext'))
     if strcmp(version,'nrd')
         dataF = datum_.data_NRD_F;
     elseif strcmp(version,'csc')
-        dataF = datum.data_CSC_F;
+        dataF = datum_.data_CSC_F;
     end
 end
 

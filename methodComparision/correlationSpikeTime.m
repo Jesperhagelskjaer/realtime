@@ -33,7 +33,6 @@ if ~exist('datum.error','var')
                 CW_NSI_MS    = cat(3,CW_NSI_MS,datum.spikes_DSort_cor{i}(:,:,ii)); %the waveform NSI_MClust
             
             end
-            
 
         end
         CN_NSI_MC(i)      = c; %not seen in any of the MCust template
@@ -64,9 +63,7 @@ if ~exist('datum.error','var')
                 t_NSI_DS     = [t_NSI_DS t_MS(ii)];
                 CW_NSI_DS  = cat(3,CW_NSI_DS,datum.spikes_MClust_cor{i}(:,:,ii));
             end
-            
-            
-            
+        
         end
         CN_NSI_DS{i}         = c; 
         CN_A_MC_h{i}         = CN_A_MC;
@@ -74,7 +71,6 @@ if ~exist('datum.error','var')
         t_NSI_DS_h{i}        = t_NSI_DS;       
     end
     
-
     mid.CN_A_DS           = CN_A_DS_h; 
     mid.CN_NSI_DS      = CN_NSI_DS;
 %    mid.CN_NSI_MC      = CN_NSI_MC_h;

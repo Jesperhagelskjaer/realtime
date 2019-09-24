@@ -1,7 +1,7 @@
 function [] = PCA_Mahanobilis(par,dataTraceJ,dataTraceD,str)
 
 spikes = 500;
-cluster = [1 2 3 4 5 6 7 8]; %clu 8 top
+cluster = [1 2]; %clu 8 top
 
 [data, c] = data_PCA(dataTraceJ,dataTraceD,spikes,cluster);
 

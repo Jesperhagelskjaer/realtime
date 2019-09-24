@@ -5,7 +5,7 @@ clc
 [par,datum] = parameter();
 
 [rez,par] = loadRez(par);
-[par] = templateLight(par);             %take of the template used for real time classification
+[par] = templateLight(par,rez);             %take of the template used for real time classification
 %plotISI(rezT); 
 
 %% plot the average waveform of JSearch and Dsort
@@ -29,29 +29,29 @@ clc
 [dataTraceJ,dataJSearchF_shift] = TTL_data_Index(par,TTLs,TimestampsEvent,datum,'type','csc');
 [dataTraceJ_NRD,dataTraceJ_NRD_shift] = TTL_data_Index(par,TTLs,TimestampsEvent,datum,'type','nrd');
 %% Plot trace
-%[dataTraceD,~] = traceDSort(par,rez,dataCSC);
+[dataTraceD,~] = traceDSort(par,rez,datum);
 
-%plotTraceChannel(par,dataJSearchF_shift,dataTraceD) Plot  all
+%plotTraceChannel(par,dataJSearchF_shift,dataTraceD) %Plot  all
 
 %plotMeanTrace(par,dataTraceJ,dataTraceD)
 %
-plotOneTrace(par,dataTraceJ,'time','ms'); %,'trace',[1 200]
+%plotOneTrace(par,dataTraceJ,'time','ms'); %,'trace',[1 200]
 plotOneTrace(par,dataTraceJ_NRD,'time','ms'); %,'trace',[1 200]
 %plotTemplateDSort(rez,10)
-
+plotTemplateJS(dataTraceJ_NRD_shift)
 %% PCA space
 
 PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
-PCA_Mahanobilis_OneCluster(par,dataJSearchF_shift)
+%PCA_Mahanobilis_OneCluster(par,dataJSearchF_shift)
 
 %% plot AC AND LFP just for J
 
-%plot_AC_TTL_LFP(par,dataTraceJ)
+plot_AC_TTL_LFP(par,dataTraceJ)
 %plot_AC_TTL_LFP(par,dataTraceJ_Light)
 
 %% Correlate DSort and JSearch
 
-%cor_D_J(par,rez,dataCSC_light,indexLight);
+cor_D_J(par,rez,dataTraceJ_NRD_shift,indexLight);
 
 %% Plot the raster of the nuerons
 % [RasterR1,par] = rasterMain(par,rez);   %create the raster plot

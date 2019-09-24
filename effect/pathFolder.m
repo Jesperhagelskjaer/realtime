@@ -1,9 +1,12 @@
 function [par] = pathFolder()
-if 1
+
+if 0
     
     par.path                     = {'P:\AU256873\recording\2019-05-21_10-21-44\','L';...
                                     'P:\AU256873\recording\2019-05-21_10-55-05\','N'};...
-        
+elseif 1
+      par.path                     = {'P:\AU256873\recording\2019-05-21_10-55-05\','N'};                          
+                                
 elseif 0
     par.path                        = {'P:\AU256873\recording\2019-05-21_10-21-44\','L';... &
                                        'P:\AU256873\recording\2019-05-21_10-44-16\','N';...

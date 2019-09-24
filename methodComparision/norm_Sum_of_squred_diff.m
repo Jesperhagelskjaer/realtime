@@ -9,11 +9,16 @@ catch
 end
 
 try
-    datum.template_mean_MClust;
+    test = datum.template_mean_MClust;
+    fprintf('Test against MCLUST\n')
 catch
     datum.error = 1;
     datum.errorTxt = 'NO_T_MC';
+    test = datum.CW_mean_JS;
+    datum.error = 1;
+    fprintf('Test against JSEARCH\n')
 end
+
 NSSD = [];
 
 if ~exist('datum.error','var')
@@ -22,9 +27,9 @@ for i = 1:size(datum.template_mean_DSort,2)
     template = datum.template_mean_DSort{i};
     T_n = size(template,1);
     
-    for j = 1:size(datum.template_mean_MClust,2)
-        
-        signal = [zeros(10,4); datum.template_mean_MClust{j}; zeros(10,4)];
+    for j = 1:size(test,2)
+        h = test{j};
+        signal = [zeros(10,4); test{j}; zeros(10,4)];
 
         for k = 1:size(signal,1)-T_n
             

@@ -21,8 +21,8 @@ while 1
     
     [datum]             = filterMain(par,datum,'ext','nrd');
     
-    plotRealDataTemplate(par,datum,rez,'ext','nrd');
-    close all
+    %plotRealDataTemplate(par,datum,rez,'ext','csc');%close all
+    
     [par]               = recalculateTemplate(par,rez,datum,'ext','nrd');
     
     [par]               = coherenceParameter(par,datum,'ext','nrd');

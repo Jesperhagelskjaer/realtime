@@ -30,6 +30,7 @@ if any(strcmp(par.dataLoad,'csc'))
     end
     par.bitmVolt = str2double(Header{17,1}([13:end]))/1e-6;
     [dataRAW] = invertSignal(par,dataRAW);
+    [dataRAW] = bit2Volt(par,dataRAW);
     datum.data_CSC_RAW = dataRAW;
     fprintf('\n')
 end
@@ -56,7 +57,7 @@ if ~isfield(datum,'data_NRD_RAW')
             dataRAW(:,i) = round(SamplesNRD/2^4);
             
         end
-        
+
         datum.data_NRD_RAW = dataRAW;
         fprintf('\n')
     end

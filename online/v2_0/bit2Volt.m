@@ -1,8 +1,8 @@
-function [data] = bit2Volt(jesper,rez,data)
+function [data] = bit2Volt(par,data)
 
-if strcmp(jesper.useBitmVolt,'Y' )
+if strcmp(par.useBitmVolt,'Y' )
 
-    data = data*rez.ops.bitmVolt;
+    data = data*par.bitmVolt;
     
 end
     

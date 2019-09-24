@@ -10,9 +10,11 @@ if strcmp(par.filtertype{1},'Y')
             dataRAW = datum.data_NRD_RAW;
         elseif strcmp(version,'csc')
             dataRAW = datum.data_CSC_RAW;
+            bool = 0
         end
     end
      
+    
     type = par.filtertype{2};
     
     if (strcmp(type,'butter')) %% No correction since Dsort is based on butterworth filter
@@ -27,7 +29,7 @@ if strcmp(par.filtertype{1},'Y')
         printf("Wrong filter")
         exit();
     end
-    
+    end
     if strcmp(version,'nrd')
         datum.data_NRD_F = dataF;
     elseif strcmp(version,'csc')
@@ -37,4 +39,4 @@ if strcmp(par.filtertype{1},'Y')
     time = toc;
     fprintf(' - finished - Elepased time, %2.2f seconds\n',time)
 end
-end
+

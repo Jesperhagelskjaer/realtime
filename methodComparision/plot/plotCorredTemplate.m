@@ -27,6 +27,10 @@ if ~exist('datum.error','var')
             %view(90,0)
             title({'MClust ',num2str(i)})
         catch
+            try
+            surf(mean(datum.CW_JS{i},3))
+            catch
+            end
         end
         
     end

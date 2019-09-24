@@ -37,7 +37,7 @@ for ii = 1:size(par.path,1)
                 indexTimeBlock = 512;% check up on
             end
             indexSampleLight(i) = (indexBlock-1) * mBlockSize + indexTimeBlock;
-            dataJSearchF(:,:,i) = dataF(xAxis+indexSampleLight(i),:);
+            dataJSearchF(:,:,i) = dataF(xAxis+indexSampleLight(i)+par.indexShift,:);
             %dataJSearchF_shift{ii}(:,:,i) = dataF{ii}(xAxis+indexSampleLight(i)-par.shifted,:);
             %dataRAW_NRD_mat(:,:,i-1) = dataRAW_NRD(par.xAxis+indexSampleLight(i-1),:);
         end
@@ -46,9 +46,9 @@ for ii = 1:size(par.path,1)
     
 end
  
-    datum.CW_JS          = dataJSearchF;
-    datum.CW_t_JS        = indexSampleLight;
-    
+    datum.CW_JS{1}          = dataJSearchF;
+    datum.CW_t_JS{1}        = indexSampleLight;
+    datum.CW_mean_JS{1}     = mean(dataJSearchF,3);
 %     figure
 %     surf(mean(datum.CW_JS,3))
 %     

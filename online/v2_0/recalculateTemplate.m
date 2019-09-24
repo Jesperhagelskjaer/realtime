@@ -5,7 +5,7 @@ if find(strcmp(varargin,'ext'))
     if strcmp(version,'nrd')
         dataF = datum_.data_NRD_F;
     elseif strcmp(version,'csc')
-        dataF = datum.data_CSC_F;
+        dataF = datum_.data_CSC_F;
     end
 end
 
@@ -22,6 +22,8 @@ temporalBig = length(windowBig);
 
 timeStampsCluster = timeStamps(find(spikeCluster == par.template{1}));%+par.filtershift;
 
+figure
+surf(rez.M_template(:,:,par.template{1}))
 
 templateStackBig = nan(temporalBig,spatial,length(timeStampsCluster));
 

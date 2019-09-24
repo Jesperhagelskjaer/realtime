@@ -63,8 +63,19 @@ for i = pathStart:pathNr %figure for each path
         end
     end
 end
-
-
+%code used to create the two red ball in my Ph.D defence min max
+% test = data{1,1}(:,3,10);
+% test = test(32:end-57)*-1;
+% xA = (-length(test)+1:1:0)*1/30;
+% 
+% [mV,mI] = min(test);
+% [maV,maI] = max(test);
+% figure
+% plot(xA,test,'linewidth',4)
+% hold on
+% scatter((mI-1)*-1/30,mV,500,'r')
+% scatter((length(test)-maI)*-1/30,maV,500,'r')
+% handleFigurePlot()
 
 for i = 1:size(data,2) 
     figure
@@ -73,6 +84,18 @@ for i = 1:size(data,2)
         handleFigurePlot(xVariable)
         plot(xAxis,mean(data{1,i},3))
     end
+    [X,Y] = meshgrid(xAxis(1)+abs(xAxis(1)):1/30:abs(xAxis(end))+abs(xAxis(1)),1:size(data{1,i},2));
+    meanTest = mean(data{1,i},3)'; 
+    figure 
+    surf(X,Y,meanTest)
+%   handleFigurePlot(xVariable)
+%     for ii = 1:size(data{1,i},2)  %the number of channels
+%         subplot(4,1,ii)
+%         handleFigurePlot(xVariable)
+%         plot(xAxis,mean(squeeze(data{1,i}(:,ii,:)),2))
+%     end
+    
+
 end
 end
 %color = get(h,'Color');

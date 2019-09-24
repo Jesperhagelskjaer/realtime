@@ -1,6 +1,7 @@
 function [WS_All,label_WS_All,t_all] = table_confusion(par,datum,mid)
 
 CN_A_DS        = mid.CN_A_DS;
+CN_A_MC        = mid.CN_A_MC;
 CN_NSI_DS      = mid.CN_NSI_DS;
 
 
@@ -12,16 +13,10 @@ t_DS_c         = mid.t_DS_c;
 t_MC_c         = mid.t_MC_c;
 t_NSI_DS       = mid.t_NSI_DS;
 t_NSI_MC       = mid.t_NSI_MC;
-%t_A            = mid.t_A_h;
 
+largest = size(t_DS_c,2);
 
-% %CN_NSI_MC = mid.CN_NSI_MC;
-% CS_NSI_MC = mid.CS_NSI_MC;
-% clusterholderNonSeen_MC = mid.CN_NSI_MC;
-% CW_NSI_DS = mid.CW_NSI_DS;
-% largest = size(t_DS_c,2);
-%
- sample = nan(size(t_DS_c,2)+1,size(t_MC_c,2)+1);
+sample = nan(size(t_DS_c,2)+1,size(t_MC_c,2)+1);
 
 for i = 1:size(t_DS_c,2)+1 %creates the name for table
     dSort{i} = strcat('Dsort_T',num2str(i));
@@ -39,11 +34,16 @@ end
 label_WS_All = [];
 t_all        = [];
 
-for i = 1:largest %in agreement
-    for ii = min(clusterholderT{i}):max(clusterholderT{i})
-        sample(i,ii) = length(find(clusterholderT{i} == ii));
+for i = 1:largest %in agreement 
+    if ~isempty(max(CN_A_DS{i}))
+          sample(i,1) = 0;      
+    end
+    for ii = min(CN_A_DS{i}):max(CN_A_DS{i})
+
+        sample(i,ii) = length(find(CN_A_DS{i} == ii));
         if i == ii
-            WS_All{i} = CS_A{i};
+            %samples(i,i) = CN_A_DS{i}
+            WS_All{i} = CN_A_DS{i};
             label_WS_All(end+1) = 1;
         end
     end
@@ -54,8 +54,8 @@ end
 %1 agreement, 2 NSI_MS, 3 NSI_DS
 
 for i = 1:size(t_DS_c,2) %Not seen in MClust
-    sample(i,end)       = clusterholderNonSeen{i};
-    WS_All{i+index}     = CS_NSI_MC{i};
+    sample(i,end)       = CN_NSI_MC(i);
+    %WS_All{i+index}     = CS_NSI_MC{i};
     label_WS_All(end+1) = 2;
     t_all{i+index}      = mid.t_NSI_MC{i};
 end
@@ -63,7 +63,7 @@ end
 m = size(WS_All,2);
 index = size(t_all,2);
 for i = 1:size(t_MC_c,2) %Not seen in DSORT
-    sample(end,i)       = clusterholderNonSeen_MC{i};
+    sample(end,i)       = CN_NSI_DS{i};
     WS_All{i+m}         = CW_NSI_DS{i};
     label_WS_All(end+1) = 3;
     t_all{i+index}        = mid.t_NSI_DS{i};
