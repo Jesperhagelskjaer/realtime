@@ -83,8 +83,12 @@ for m = 1:size(data,2)
     end
     index1 = find(c == m);
     index2 = find(c ~= m);
-    mahal_sorted = sort(mahal(score(index1,1:3),score(index2,1:3)));
-
+    mahal_sorted = sort(mahal(score(index2,1:3),score(index1,1:3)));
+    if (mahal_sorted < length(index1))
+        fprintf("isolation distance failed du to few cluster\n")
+    else
+        mahal_sorted(length(index1))
+    end
     
 end
 
