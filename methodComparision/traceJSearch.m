@@ -1,13 +1,9 @@
 function [datum] = traceJSearch(par,datum,varargin)
 
-if find(strcmp(varargin,'type'))
-    if strcmp(varargin{find(strcmp(varargin,'type')) + 1},'csc')
-        dataF =  datum.CSC;
-        timestamps = datum.Timestamps_CSC;
-    elseif strcmp(varargin{find(strcmp(varargin,'type')) + 1},'nrd')
-        dataF = datum.NRD_F;
-        timestamps = datum.Timestamps_CSC;
-    end
+try
+   data = datum.NRD_F;
+catch
+   data = datum.CSC_f; 
 end
 
 xAxis = par.xAxis;
@@ -37,7 +33,7 @@ for ii = 1:size(par.path,1)
                 indexTimeBlock = 512;% check up on
             end
             indexSampleLight(i) = (indexBlock-1) * mBlockSize + indexTimeBlock;
-            dataJSearchF(:,:,i) = dataF(xAxis+indexSampleLight(i)+par.indexShift,:);
+            dataJSearchF(:,:,i) = data(xAxis+indexSampleLight(i)+par.indexShift,:);
             %dataJSearchF_shift{ii}(:,:,i) = dataF{ii}(xAxis+indexSampleLight(i)-par.shifted,:);
             %dataRAW_NRD_mat(:,:,i-1) = dataRAW_NRD(par.xAxis+indexSampleLight(i-1),:);
         end
@@ -45,14 +41,11 @@ for ii = 1:size(par.path,1)
     end
     
 end
- 
-    datum.CW_JS{1}          = dataJSearchF;
-    datum.CW_t_JS{1}        = indexSampleLight;
-    datum.CW_mean_JS{1}     = mean(dataJSearchF,3);
-%     figure
-%     surf(mean(datum.CW_JS,3))
-%     
-%     reshape(datum.CW_JS,[1 *] 
+
+datum.CW_JS{1}          = dataJSearchF;
+datum.CW_t_JS{1}        = indexSampleLight;
+datum.CW_mean_JS{1}     = mean(dataJSearchF,3);
+
     
 end
         

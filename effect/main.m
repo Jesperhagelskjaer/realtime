@@ -31,14 +31,14 @@ clc
 %% Plot trace
 [dataTraceD,~] = traceDSort(par,rez,datum);
 
-%plotTraceChannel(par,dataJSearchF_shift,dataTraceD) %Plot  all
+plotTraceChannel(par,dataJSearchF_shift,dataTraceD,'time','ms') %Plot  all
 
-%plotMeanTrace(par,dataTraceJ,dataTraceD)
+plotMeanTrace(par,dataTraceJ_NRD_shift,dataTraceD,'time','ms')
 %
 %plotOneTrace(par,dataTraceJ,'time','ms'); %,'trace',[1 200]
 plotOneTrace(par,dataTraceJ_NRD,'time','ms'); %,'trace',[1 200]
-%plotTemplateDSort(rez,10)
-plotTemplateJS(dataTraceJ_NRD_shift)
+
+plotTemplateJS(par,dataTraceJ_NRD_shift,'time','ms')
 %% PCA space
 
 PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
@@ -46,7 +46,7 @@ PCA_Mahanobilis(par,dataJSearchF_shift,dataTraceD,'P_part_trace')
 
 %% plot AC AND LFP just for J
 
-plot_AC_TTL_LFP(par,dataTraceJ)
+plot_AC_TTL_LFP(par,dataTraceJ_NRD)
 %plot_AC_TTL_LFP(par,dataTraceJ_Light)
 
 %% Correlate DSort and JSearch
@@ -65,12 +65,21 @@ cor_D_J(par,rez,dataTraceJ_NRD_shift,indexLight);
 
 
 %% LFP effect
-% The filtering effect should be made very careful
-
+% The filterg effect should be made very careful
 %LFP_effect(par,rez)
 %gassuasianRaster(par,rezT,RasterR1)
+
+
+
+
 
 % for i =1:size(rez.M_template,3)
 % wv_ccg(rez,i)
 % end
+% % load seamount;
+% % figure
+% % hs = scatter(x,y,5,z);
+% % [hleg, hobj, hout, mout] = legend(hs, 'test');
+% % hobj(2).Children.MarkerSize = 10;
+
 

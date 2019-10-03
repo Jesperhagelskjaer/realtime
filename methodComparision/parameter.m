@@ -13,8 +13,8 @@ par.filtertype          = {'Y','butter','normal','bandpass',2}; %
 par.filtering           = {300,9000,30000,6}; 
 
 
-par.template_LFP        = {0,[5 6 7 8]};
-par.xAxis               = [-10:40];
+par.chs                 = {0,[5 6 7 8]};
+par.xAxis               = [-25:25];
 par.jitter              = [15];
 par.useBitmVolt         = 'Y';
 par.signalInverted      = 'Y';

@@ -10,8 +10,8 @@ data = data{1};
 % end
 
 for i = 1:size(data,3)
-    [~, minMatrix(:,i)] = max(data(1:minR,:,i));
-    [~, maxMatrix(:,i)] = max(data(minR:end,:,i));
+    [~, minMatrix(:,i)] = min(data(1:minR,:,i));
+    [~, maxMatrix(:,i)] = min(data(minR+10:end,:,i));
 %     h = figure;
 %     plot(data(:,1,i))
 %     close(h)
@@ -19,7 +19,7 @@ end
 
 minMatrix = minMatrix - minR;
 figure
-
+holder_l = ({'min AP','max LFP'});
 for i =1:size(data,2)
    
     subplot(2,2,i)
@@ -32,6 +32,9 @@ for i =1:size(data,2)
     if i == 1
     %plot([0 33],[600 600],'k')
     end
+    legend(holder_l);
+    legend('boxoff')
+    title(['Channel ',num2str(par.chs{2}(i))])
  end
 
 end

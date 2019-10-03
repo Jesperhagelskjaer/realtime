@@ -13,7 +13,7 @@ function [datum] = main_load_NRD(par,datum,path)
             fprintf('%d out of %d',length(par.chs{2}),i)
             
             NameNRD = 'CheetahRawData.nrd';
-            fullNameNRD = strcat(path{ii},'\nrd\',NameNRD);
+            fullNameNRD = strcat(path,'\nrd\',NameNRD);
             [Timestamps, SamplesNRD, Header] = Nlx2MatNRD(fullNameNRD,ch-1 ,[1 1], 1, 1, [] );
             %         figure
             %         plot(SamplesNRD(i,:))
@@ -29,9 +29,9 @@ function [datum] = main_load_NRD(par,datum,path)
             dataRAW = dataRAW * str2double(Header{14,1}([13:end]))/1e-6;
         end
         
-        datum.NRD{ii} = dataRAW;
+        datum.NRD = dataRAW;
         fprintf('\n')
     end
-    datum.Timestamps_NRD{ii} = Timestamps;
+    datum.Timestamps_NRD = Timestamps;
     
 end

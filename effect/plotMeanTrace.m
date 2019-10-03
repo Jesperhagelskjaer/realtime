@@ -1,36 +1,47 @@
-function [] = plotMeanTrace(par,dataT_J,dataT_D)
+function [] = plotMeanTrace(par,dataT_J,dataT_D,varargin)
 
-meanTrace_J = mean(dataT_J,3);
+if find(strcmp(varargin,'time'))
+    xVariable = varargin{find(strcmp(varargin,'time')) + 1};
+    if strcmp(xVariable,'sample')
+        xAxis = par.interval(1):par.interval(2);
+        xL = 'Time [samples]';
+    elseif strcmp(xVariable,'ms')
+        xAxis = (par.interval(1):par.interval(2))/30;
+        xL = 'Time [ms]';
+    end
+end
+
+meanTrace_J = mean(dataT_J{1},3);
 
 for i = 1:size(dataT_D,2)
     meanTrace_D(:,:,i) = mean(dataT_D{i},3);
 end
 
-maxV = max(max(max(meanTrace_D)));
-if maxV < max(max(meanTrace_J))
-    maxV = max(max(meanTrace_J));
-end
-minV = min(min(min(meanTrace_D)));
-
-if minV > min(min(meanTrace_J))
-    minV = min(min(meanTrace_J));
-end
-
-
-
+meanTrace_J = mean(dataT_J{1},3);
+test = cat(3,meanTrace_D,meanTrace_J);
 
 figure
 for i = 1:size(meanTrace_J,2)
     subplot(1,4,i)
     hold on
-    plot(meanTrace_J(:,i),'DisplayName','J')
+    plot(xAxis,meanTrace_J(:,i),'DisplayName','J')
     for ii = 1:size(meanTrace_D,3)
-        plot(meanTrace_D(:,i,ii),'DisplayName','D')
+        plot(xAxis,meanTrace_D(:,i,ii),'DisplayName','D')
     end
-    ylim([minV-10 maxV+10])
+    %h = get(gca,'Ylim');
     handleFigurePlot
-    xlim([0 length((par.xAxis))])
-    plot([0 33],[maxV+10 maxV+10],'k')
+    xlabel(xL)
+    if i == 1
+        ylabel('Voltage [uV]')
+    end
+    title(['Channel ',num2str(par.chs{2}(i))])
+    legend({'JS-1','DS-1','DS-2'},'location','south east');
+    legend('boxoff')
+    %xlim([0 length((par.xAxis))])
+    %plot([0 33],[maxV+10 maxV+10],'k')
 end
 legend
+
+
+
 

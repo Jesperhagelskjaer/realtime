@@ -10,7 +10,7 @@ datum = [];
 
 [datum] = main_load_recording(par,datum);
         
-%[datum] = filterMain(par,datum,'OpenEphys');
+[datum] = filterMain(par,datum);
 
 %[datum] = loadMClust(par,datum);        
 
@@ -18,7 +18,7 @@ datum = [];
 
 [datum] = correlate_main(par,datum,rez); %NCC.,NSSD
  
-PCA_Mahanobilis_allCh(par,datum,'C_PCA',[],'alignment','min','normalisation','minMax') %
+PCA_Mahanobilis_allCh(par,datum,'alignment','min','normalisation','minMax') %
 
 [TE_FC] =  MakeTrialEvents_SimpleFreeChoice(par.path,'OpenEphys','\*MM_03_FreeChoiceDynMatch_Feb23_2019_Session1*');%\*FreeChoice*'
  

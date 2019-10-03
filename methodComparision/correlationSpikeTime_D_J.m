@@ -89,9 +89,11 @@ if ~exist('datum.error','var')
   
     [WS_All,label_WS_All,t_all] = table_confusion(par,datum,mid);
     
-    datum.CS_All        = WS_All;
+    datum.CW_All        = datum.CW_DS;
+    datum.CW_All(end+1) = datum.CW_JS;
+    
+    
     datum.CS_A          = CW_A_h;
-    datum.CS_NSI_MC     = CN_NSI_MC_h;
     datum.label_WS_All  = label_WS_All; %1 agreemen, 2 NSI_MS, 3 NSI_DS
     datum.t_A           = t_A_h;
     datum.t_all         = t_all;

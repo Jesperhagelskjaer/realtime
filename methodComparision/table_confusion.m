@@ -71,7 +71,7 @@ end
 
 sTable = array2table(sample,'RowNames',dSort,'VariableNames',Mcluster)
 
-filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.template_LFP{2})/4)-1),'_confusionMatrix','.xlsx');
+filename = strcat(par.path,'\jesper\bundle',num2str(ceil(max(par.chs{2})/4)-1),'_confusionMatrix','.xlsx');
 %writetable(sTable,filename,'WriteRowNames',true)
 
 end

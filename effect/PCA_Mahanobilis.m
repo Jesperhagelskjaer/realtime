@@ -1,23 +1,7 @@
 function [] = PCA_Mahanobilis(par,dataTraceJ,dataTraceD,str)
 
-spikes = 500;
-cluster = [1 2]; %clu 8 top
 
-[data, c] = data_PCA(dataTraceJ,dataTraceD,spikes,cluster);
-
-%[data_N] = data_N_PCA(par,data, c,str);   %P_t: normalize for to power in each trace
-
-%data_N_PCA_plotting(data_N,c)
-
-%PCA_Mahanobilis_allCh(dataTraceJ,dataTraceD,spikes,cluster)
-
-%PCA_Mahanobilis_singleCh(dataTraceJ,dataTraceD,spikes,cluster)
-
-%PCA_Mahanobilis_singleCh_N(dataTraceJ,dataTraceD,spikes,cluster) %normalized each own value cluster pr. channels
-%PCA_Mahanobilis_singleCh_N2(dataTraceJ,dataTraceD,spikes,cluster) %normalized each cluster with the same value pr. channels
-
-
-PCA_Mahanobilis_allCh(dataTraceJ,dataTraceD,spikes,cluster)
+PCA_Mahanobilis_allCh(dataTraceJ,dataTraceD)
 
 
 if 0

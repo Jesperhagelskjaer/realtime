@@ -58,11 +58,39 @@ for i = pathStart:pathNr %figure for each path
         subplot(size(data{1,pathNr},2),1,ii)
         hold on
         handleFigurePlot(xVariable)
-        for iii = TTL_Start:TTL_End
+        for iii = TTL_Start:TTL_End %should not done in a Loop J
             plot(xAxis,data{1,i}(:,ii,iii))
         end
+        ylim([-220 200])
+        if ii == size(data{1,i},2)
+            xlabel('Time [ms]')
+        end
+        title(['Channel ',num2str(par.chs{2}(ii))])
+        xlim([-1.5 2.5])
     end
 end
+holder_l = ({'light','No-light'});
+figure
+for ii = 1:size(data{1,i},2) %the number of channels
+    for i = pathStart:pathNr %figure for each path
+        subplot(size(data{1,pathNr},2),1,ii)
+        holder = mean(squeeze((data{1,i}(:,ii,:))),2);
+        plot(xAxis,holder)
+        hold on
+        handleFigurePlot(xVariable)
+        ylim([-150 100])
+        if ii == size(data{1,i},2)
+            xlabel('Time [ms]')
+        end
+        title(['Channel ',num2str(par.chs{2}(ii))])
+        h = legend(holder_l);
+        legend('boxoff') 
+        xlim([-1 3.5])
+    end
+end
+
+
+
 %code used to create the two red ball in my Ph.D defence min max
 % test = data{1,1}(:,3,10);
 % test = test(32:end-57)*-1;

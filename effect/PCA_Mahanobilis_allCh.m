@@ -1,4 +1,6 @@
-function [] = PCA_Mahanobilis_allCh(dataTraceJ,dataTraceD,spikes,cluster)
+function [] = PCA_Mahanobilis_allCh(dataTraceJ,dataTraceD)
+
+T_cl = size(dataTraceD,2);
 
 data = permute(dataTraceJ{1},[3 2 1]);
 data = reshape(data,size(data,1),[],1);
@@ -6,26 +8,23 @@ data = reshape(data,size(data,1),[],1);
 meanCh = mean(data,1);   %calculate the mean of one channel
 c = ones(1,size(data,1));
 
-for ii = 1:length(cluster)
+for ii = 1:length(T_cl)
     
-    dataP = permute(dataTraceD{cluster(ii)},[3 2 1]);
+    dataP = permute(dataTraceD{ii},[3 2 1]);
     appenData = reshape(dataP,size(dataP,1),[],1);
     
     %appenData = appenData(:,1:min(spikes, size(appenData,2)));
     
     meanCh_S = mean(appenData,1);         %calculate the mean of one channel
     meanCh = [meanCh meanCh_S];
-    
     c = [c ones(1,size(appenData,1))*(ii+1)];
     
     data = [data; appenData];
 end
-
 data = data/max(max(data));
 
 
 [coeff,score,latent,tsquared,explained] = pca(data);
-
 
 figure
 scatter3(score(:,1),score(:,2),score(:,3),150,c,'.')
@@ -34,6 +33,35 @@ xlabel('1 - PC')
 ylabel('2 - PC')
 zlabel('3 - PC')
 handleFigurePlot
+
+
+%% thesis
+
+vector{2} = [1 1 1 ];
+vector{3} = [1 1 0 ];
+color = ['m','g','b'];
+figure;
+hold on
+
+for i = 1:3
+cSC = color(i);
+holder = find(c == i);
+scatter3(score(holder,1),score(holder,2),score(holder,3),150,cSC,'.');
+%plot3(score(holder,1),score(holder,2),score(holder,3),'o');
+
+%[hleg, hobj, hout, mout] = legend({'DS-1','DS-2','JS-1'});
+%hobj(2).Children.MarkerSize = 10;
+
+axis equal
+xlabel('1 - PC')
+ylabel('2 - PC')
+zlabel('3 - PC')
+handleFigurePlot
+end
+[~,b] = legend({'DS-1','DS-2','JS-1'});
+set(findobj(b,'-property','MarkerSize'),'MarkerSize',85)
+legend('boxoff')
+
 
 for m = 1:length(cluster)+1
     for n = 1:length(cluster)+1

@@ -1,13 +1,14 @@
 function [datum] = traceDSort(par,rez,datum)
 
 try
-data = datum.CSC_F;
+    data = datum.NRD_F;
 catch
-   data = datum.CSC; 
+   data = datum.CSC_f; 
 end
+
 clustNr = [];
 for i = 1:size(rez.Chan,1)
-    if any(intersect(rez.Chan{i},par.template_LFP{2}))
+    if any(intersect(rez.Chan{i},par.chs{2}))
         clustNr = [clustNr i];
     end
 end
