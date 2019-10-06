@@ -1,4 +1,4 @@
-function [] = PCA_Mahanobilis_allCh(par,datum,varargin)
+function [] = PCA_Mahanobilis_allCh(varargin)
 
 %the length for the cut to take into the PCA calculation before and after
 %the alignment peak
@@ -15,7 +15,24 @@ if find(strcmp(varargin,'normalisation'))
 end
 
 %the data load here cell array (time x channel x trace)
-data = datum.CW_All;
+if 0
+    data = datum.CW_All;
+else
+    stream1 = rand(50,4,500)*6;
+    stream2 = rand(50,4,550)*6;
+    for i = 1:4
+        for k = 1:3
+            stream1(25+k,i,:) = stream1(25+k,i,:)-10-1*k*i;
+            if i > 1
+                stream2(25+k,i,:) = stream2(25+k,i,:)-10-2*k*i;
+            end
+        end
+    end
+    data{1} = stream1;
+    data{2} = stream2;
+end
+
+
 
 if strcmp(input_alignment,'min')
 %find the index which to align each channel if the channels has minimum
@@ -31,7 +48,7 @@ shiftMatrix = zeros(center*2,j,lgt);
 
 %used for alignment
 si = size(data{cl},1)-1;
-count = 0; c = [];
+count = 0; c = []; 
 
 for cl = 1:size(data,2)
     for i = 1:size(data{cl},3)
@@ -66,6 +83,10 @@ if exist('input_normalisation','var')
 end
 
 [coeff,score,latent,tsquared,explained] = pca(PCA_matrix');
+Y = tsne(PCA_matrix','Algorithm','exact','Distance','cosine','NumDimensions',3);
+
+figure
+gscatter(Y(:,1),Y(:,2),Y(:,3))
 
 figure
 scatter3(score(:,1),score(:,2),score(:,3),[],c,'filled')
@@ -82,12 +103,14 @@ for m = 1:size(data,2)
         mahal_d(m,n) = mahal(mean(score_h{m}),score_h{n}); %Compute the squared Euclidean distance of each observation in Y from the mean of X .  
     end
     index1 = find(c == m);
-    index2 = find(c ~= m);
+    index2 = find(c ~= m); %find 
     mahal_sorted = sort(mahal(score(index2,1:3),score(index1,1:3)));
     if (mahal_sorted < length(index1))
-        fprintf("isolation distance failed du to few cluster\n")
+        fprintf("Isolation distance failed du to few points\n")
+        d_isolation(m) = nan; 
     else
-        mahal_sorted(length(index1))
+        
+        d_isolation(m) = mahal_sorted(length(index1));
     end
     
 end
