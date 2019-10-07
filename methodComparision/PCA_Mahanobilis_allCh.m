@@ -1,4 +1,4 @@
-function [] = PCA_Mahanobilis_allCh(varargin)
+function [] = PCA_Mahanobilis_allCh(par,datum,varargin)
 
 %the length for the cut to take into the PCA calculation before and after
 %the alignment peak
@@ -15,7 +15,7 @@ if find(strcmp(varargin,'normalisation'))
 end
 
 %the data load here cell array (time x channel x trace)
-if 0
+if 1
     data = datum.CW_All;
 else
     stream1 = rand(50,4,500)*6;
@@ -32,8 +32,6 @@ else
     data{2} = stream2;
 end
 
-
-
 if strcmp(input_alignment,'min')
 %find the index which to align each channel if the channels has minimum
 
@@ -43,6 +41,7 @@ for cl = 1:size(data,2)
     lgt = lgt + size(data{cl},3);
 end
 
+% Create the matrix for the shifted waveform
 j = size(data{1},2);
 shiftMatrix = zeros(center*2,j,lgt);
 
@@ -67,9 +66,7 @@ end
 %cutting out the non-excential part of the waveform (by eye)
 shiftMatrix = shiftMatrix(center+[-before:after],:,:);
 
-i = size(shiftMatrix,1);
-j = size(shiftMatrix,2);
-l = size(shiftMatrix,3);
+i = size(shiftMatrix,1);j = size(shiftMatrix,2);l = size(shiftMatrix,3);
 
 %cat the traces into one trace
 PCA_matrix = reshape(shiftMatrix,[i*j,l]);
@@ -83,37 +80,47 @@ if exist('input_normalisation','var')
 end
 
 [coeff,score,latent,tsquared,explained] = pca(PCA_matrix');
-Y = tsne(PCA_matrix','Algorithm','exact','Distance','cosine','NumDimensions',3);
+Y2 = tsne(PCA_matrix','Algorithm','exact','Distance','euclidean','NumDimensions',3);
 
 figure
-gscatter(Y(:,1),Y(:,2),Y(:,3))
+scatter3(Y2(:,1),Y2(:,2),Y2(:,3),[],c,'filled')
+title('TSNE euclidean')
+
+
 
 figure
 scatter3(score(:,1),score(:,2),score(:,3),[],c,'filled')
 xlabel('PC-1');ylabel('PC-2');zlabel('PC-3');
 
-
-
 for i = 1:size(data,2)
     score_h{i} = score(logical(c == i),1:3);
 end
- 
+str1 = "Isolation distance failed due to few points";
+str2 = "Isolation distance - ";
+str3 = 'L ratio - ';
 for m = 1:size(data,2)
     for n = 1:size(data,2)     
         mahal_d(m,n) = mahal(mean(score_h{m}),score_h{n}); %Compute the squared Euclidean distance of each observation in Y from the mean of X .  
     end
     index1 = find(c == m);
-    index2 = find(c ~= m); %find 
+    index2 = find(c ~= m); 
     mahal_sorted = sort(mahal(score(index2,1:3),score(index1,1:3)));
+    L(m) = sum(1-chi2cdf(mahal_sorted,3));
+    L_ratio(m) = L(m)/length(index1);
+    fprintf('\ncluster %d: %s %2.2f\n',m,str3,L_ratio(m) );
     if (mahal_sorted < length(index1))
-        fprintf("Isolation distance failed du to few points\n")
+        fprintf('cluster %d: %s\n',m,str1 );
         d_isolation(m) = nan; 
-    else
-        
+    else     
         d_isolation(m) = mahal_sorted(length(index1));
+        fprintf('cluster %d: %s %0.2f\n',m,str2,d_isolation(m) );
     end
-    
 end
+
+
+
+
+
 
 
 mahal_d
@@ -121,7 +128,7 @@ datum.mahal_d = mahal_d;
 % 
 % table_M_Distance(par,datum)
 % 
-% end
+ end
 
 
 
