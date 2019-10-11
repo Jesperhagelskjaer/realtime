@@ -8,10 +8,8 @@ function [par] = parameter()
 par.path                = 'P:\AU256873\recording\2019-05-21_10-55-05\';
 par.rezName             = 'rezFinal_J';
 
-
 par.filtertype          = {'Y','butter','normal','bandpass',2}; %
 par.filtering           = {300,9000,30000,6}; 
-
 
 par.chs                 = {0,[5 6 7 8]};
 par.xAxis               = [-25:25];

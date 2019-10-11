@@ -3,8 +3,6 @@ function [] = PCA_Mahanobilis_allCh(par,datum,varargin)
 %made by Jesper Hagelskjær Ph.D.
 %the length for the cut to take into the PCA calculation before and after
 %the alignment peak
-
-%Note - AC must be negative
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % paper - Quantitative measures of cluster quality for use in extracellular recordings
 % isolation distance bound [0 inf] larger is better
@@ -12,8 +10,9 @@ function [] = PCA_Mahanobilis_allCh(par,datum,varargin)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-center = 100;   % center for the alignment of the waveform
+before = 10; %points taking before aligment peak into the pca calculation
 cut  = [10 10]; %points taking before after aligment peak into the pca calculation
+
 
 if find(strcmp(varargin,'alignment'))
     input_alignment = varargin{find(strcmp(varargin,'alignment')) + 1};
@@ -27,8 +26,7 @@ end
 data = datum.CW_All;
 
 if strcmp(input_alignment,'min')
-    %find the index which to align each channel with different minimum pr.
-    %trace
+    %find the index which to align each channel if the channels has minimum
     
     %many many traces in total (smarter method???)
     lgt = 0;
@@ -58,7 +56,7 @@ if strcmp(input_alignment,'min')
     end
     
     %cutting out the non-excential part of the waveform (by eye)
-    shiftMatrix = shiftMatrix(center+[-cut(1):cut(2)],:,:);
+    shiftMatrix = shiftMatrix(center+[-cut(1):cut(1)],:,:);
     
     i = size(shiftMatrix,1);j = size(shiftMatrix,2);l = size(shiftMatrix,3);
     

@@ -3,7 +3,7 @@ function [datum] = loadEvent(par,datum)
 tic
 path = par.path;
 for i = 1:size(path,1)
-    fullNameEvents = strcat(path,'\Events.nev');
+    fullNameEvents = strcat(path,'Events.nev');
     
     [TimestampsEvent, EventIDs, TTLs, Extras, EventStrings, HeaderEvent] = Nlx2MatEV(fullNameEvents, [1 1 1 1 1], 1, 1, [] );
     
