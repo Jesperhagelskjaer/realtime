@@ -36,7 +36,7 @@ if strcmp(input_alignment,'min')
         lgt = lgt + size(data{cl},3);
     end
     
-    % Create the matrix for the shifted waveforms
+    % Create the matrix for the shifted traces
     shiftMatrix = zeros(center*2,size(data{1},2),lgt);
     
     %used for alignment

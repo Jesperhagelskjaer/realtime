@@ -22,8 +22,8 @@ function [datum] = main_load_NRD(par,datum,path)
                 dataRAW = zeros(length(SamplesNRD),length(par.chs{2}),'double');
             end
             %convert from int24 from int16
-            %dataRAW(:,i) = round(SamplesNRD/2^4);
-            dataRAW(:,i) = SamplesNRD;
+            dataRAW(:,i) = round(SamplesNRD/2^4);
+            %dataRAW(:,i) = SamplesNRD;
         end
         if strcmp(par.useBitmVolt,'Y')
             dataRAW = dataRAW * str2double(Header{14,1}([13:end]))/1e-6;

@@ -20,6 +20,7 @@ end
      
      [datum] = loadOpenEphys(par,datum)
  catch
+     
  end
  
 
